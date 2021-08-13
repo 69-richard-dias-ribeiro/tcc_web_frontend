@@ -1,18 +1,102 @@
-<template>
+<!--<template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
+</template>-->
+<template>
+  <link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <div class="container">
+    <div class="container h-100">
+      <div class="row align-items-center h-100">
+        <div class="col-6 mx-auto">
+          <div>
+            <img src="../assets/logo_with_title.png" />
+          </div>
+        </div>
+        <div class="col-6 mx-auto">
+          <div>
+            <div
+              style="
+                border: 1px solid gray;
+                padding: 30px;
+                box-shadow: 0 0 3px gray;
+                border-radius: 10px;
+                background-color: white;
+              "
+            >
+              <input
+                id="login"
+                type="text"
+                placeholder="Matrícula"
+              /><br /><br />
+              <input type="text" placeholder="Senha" /><br /><br />
+              <button class="login_button">Entrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
+
+// export default {
+//   name: 'Home',
+//   components: {
+//     HelloWorld
+//   }
+// }
+import Footer from "../components/Footer.vue";
 
 export default {
-  name: 'Home',
   components: {
-    HelloWorld
-  }
-}
+    Footer,
+  },
+};
 </script>
+
+<style>
+* {
+  background-color: #f6f6f6;
+}
+
+input {
+  border: 0.5px solid grey;
+  border-radius: 5px;
+}
+
+.login_card {
+  width: 20%;
+  height: 20%;
+  background-color: white;
+  position: absolute;
+}
+
+.login_button {
+  background-color: #1877f2;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 38px;
+  padding: 0 16px;
+  width: 40%;
+  color: white;
+  cursor: pointer;
+}
+
+.login_button:hover {
+  background-color: #1664ca;
+}
+</style>
