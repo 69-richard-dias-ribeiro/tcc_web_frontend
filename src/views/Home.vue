@@ -32,12 +32,20 @@
                 background-color: white;
               "
             >
+            
               <input
                 id="login"
                 type="text"
                 placeholder="Matrícula"
               /><br /><br />
-              <input type="text" placeholder="Senha" /><br /><br />
+              <input
+                id="password_input"
+                :type="this.hidePassword ? 'password'  : 'text'"
+                placeholder="Senha" v-model="this.password"
+              /><span v-if="this.password" @click.stop="this.hidePassword = !this.hidePassword;"><img
+                           :class="{hide : hidePassword, show: !hidePassword}"></span>
+              
+              <br /><br />
               <button class="login_button">Entrar</button>
             </div>
           </div>
@@ -64,6 +72,17 @@ export default {
   components: {
     Footer,
   },
+  data() {
+    return {
+      hidePassword: true,
+      password: undefined
+    }
+  },
+  methods: {
+    passwordOnChange(input) {
+      this.isPasswordEmpty = !input.nodeValue == '';
+    }
+  }
 };
 </script>
 
@@ -98,5 +117,36 @@ input {
 
 .login_button:hover {
   background-color: #1664ca;
+}
+
+.show {
+  background-image: url('../assets/password_eye_open.png');
+  width: 27.6px; height: 27.6px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0.5px solid grey;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.hide {
+  background-image: url('../assets/password_eye_shut.png');
+  width: 27.6px; height: 27.6px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0.5px solid grey;
+  border-radius: 100%;
+  cursor: pointer;
+  filter: brightness(75%);
+}
+
+.hide:hover, .show:hover{
+ box-shadow: 0 0 5px grey;
+}
+
+.hidden {
+  display: none;
 }
 </style>
