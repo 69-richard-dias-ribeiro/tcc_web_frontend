@@ -13,10 +13,10 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
     rel="stylesheet"
   />
-  <div class="container">
+  <div class="container vertical-center" style="margin-top: 15%">
     <div class="container h-100">
-      <div class="row align-items-center h-100">
-        <div class="col-6 mx-auto">
+      <div class="row align-items-center">
+        <div class="col-6">
           <div>
             <img src="../assets/logo_with_title.png" />
           </div>
@@ -46,7 +46,7 @@
                            :class="{hide : hidePassword, show: !hidePassword}"></span>
               
               <br /><br />
-              <button class="login_button">Entrar</button>
+              <router-link to="/pagina_inicial"><button class="login_button">Entrar</button></router-link>
             </div>
           </div>
         </div>
