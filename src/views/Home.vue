@@ -83,8 +83,15 @@ export default {
       var min = data.getMinutes(); // 0-59
       //var seg     = data.getSeconds();        // 0-59
 
+      /* inserir um 0 em dias/meses/horas/minutos com um só digito ;) */
+      mes = mes + 1;
+      if (String(dia).length == 1) dia = "0" + dia;
+      if (String(mes).length == 1) mes = "0" + mes;
+      if (String(hora).length == 1) hora = "0" + hora;
+      if (String(min).length == 1) min = "0" + min;
+
       // Formata a data e a hora (note o mês + 1)
-      var str_data = dia + "/" + (mes + 1) + "/" + ano4;
+      var str_data = dia + "/" + (mes) + "/" + ano4;
       var str_hora = hora + ":" + min;
 
       // Mostra o resultado
