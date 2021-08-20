@@ -53,7 +53,7 @@
       </div>
     </div>
   </div>
-  <Footer />
+  
 </template>
 
 <script>
@@ -66,12 +66,9 @@
 //     HelloWorld
 //   }
 // }
-import Footer from "../components/Footer.vue";
 
 export default {
-  components: {
-    Footer,
-  },
+  
   data() {
     return {
       hidePassword: true,

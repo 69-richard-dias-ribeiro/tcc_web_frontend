@@ -57,7 +57,7 @@
         <div class="col-9">
           <br />
 
-          <canvas id="canvas" width="1045px" height="688%"></canvas>
+          <canvas id="canvas" width="1045px" height="664.5%"></canvas>
 
           <!-- Canvas goes here -->
         </div>

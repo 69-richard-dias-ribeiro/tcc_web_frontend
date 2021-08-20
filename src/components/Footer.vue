@@ -18,7 +18,8 @@
   font-family: Helvetica, Arial, sans-serif;
   width: 100%;
   bottom: 0px;
-  position: absolute;
+  left: 0;
+  position: fixed;
   margin: 0px;
   line-height: 25px;
 }
