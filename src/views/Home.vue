@@ -6,7 +6,7 @@
             Sair
           </button>
       </router-link><br /><br /><br /><br /><br /><br /><br /><br />
-          <p style="font-size: 21px; font-weight: 500; color: grey;">
+          <p style="font-size: 23px; font-weight: 500; color: grey;">
               <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu Principal</u></b>
             </p>
 
@@ -50,7 +50,7 @@
     </div>
     
     <div style="float: right;">
-      <canvas id="canvas" width="1100" height="600">
+      <canvas id="canvas" width="1106" height="600">
       </canvas>
     </div>
   </div>
@@ -58,62 +58,62 @@
 
 <script>
 export default {
-  // methods: {
+  methods: {
  
-  // },
+  },
 
-  // mounted() {
+  mounted() {
 
-  //   function returnCurrentTimeStamp() {
-  //     // Obtém a data/hora atual
-  //     var data = new Date();
+    function returnCurrentTimeStamp() {
+      // Obtém a data/hora atual
+      var data = new Date();
 
-  //     // Guarda cada pedaço em uma variável
-  //     var dia = data.getDate(); // 1-31
-  //     var mes = data.getMonth(); // 0-11 (zero=janeiro)
-  //     var ano4 = data.getFullYear(); // 4 dígitos
-  //     var hora = data.getHours(); // 0-23
-  //     var min = data.getMinutes(); // 0-59
-  //     //var seg     = data.getSeconds();        // 0-59
+      // Guarda cada pedaço em uma variável
+      var dia = data.getDate(); // 1-31
+      var mes = data.getMonth(); // 0-11 (zero=janeiro)
+      var ano4 = data.getFullYear(); // 4 dígitos
+      var hora = data.getHours(); // 0-23
+      var min = data.getMinutes(); // 0-59
+      //var seg     = data.getSeconds();        // 0-59
 
-  //     /* inserir um 0 em dias/meses/horas/minutos com um só digito ;) */
-  //     mes = mes + 1;
-  //     if (String(dia).length == 1) dia = "0" + dia;
-  //     if (String(mes).length == 1) mes = "0" + mes;
-  //     if (String(hora).length == 1) hora = "0" + hora;
-  //     if (String(min).length == 1) min = "0" + min;
+      /* inserir um 0 em dias/meses/horas/minutos com um só digito ;) */
+      mes = mes + 1;
+      if (String(dia).length == 1) dia = "0" + dia;
+      if (String(mes).length == 1) mes = "0" + mes;
+      if (String(hora).length == 1) hora = "0" + hora;
+      if (String(min).length == 1) min = "0" + min;
 
-  //     // Formata a data e a hora (note o mês + 1)
-  //     var str_data = dia + "/" + (mes) + "/" + ano4;
-  //     var str_hora = hora + ":" + min;
+      // Formata a data e a hora (note o mês + 1)
+      var str_data = dia + "/" + (mes) + "/" + ano4;
+      var str_hora = hora + ":" + min;
 
-  //     // Mostra o resultado
-  //     return str_data + " " + str_hora;
-  //   }
+      // Mostra o resultado
+      return str_data + " " + str_hora;
+    }
 
-  //     var canvas = document.getElementById("canvas");
-  //     var ctx = canvas.getContext("2d");
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
 
-  //     var img = new Image();
-  // img.onload = function() {
-  //   ctx.drawImage(img, 0, 0);
-  // };
-  // img.src = '/assets/gwagwa.png';
+      var img = new Image();
+  img.onload = function() {
+    ctx.drawImage(img, 0, 0);
+  };
+  img.src = '/assets/gwagwa.png';
       
-  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //     ctx.font = "12px Arial";
-  //     ctx.fillText(returnCurrentTimeStamp(), 5, 15);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = "12px Arial";
+      ctx.fillText(returnCurrentTimeStamp(), 5, 15);
 
-  //   window.setInterval(function () {
-  //     var canvas = document.getElementById("canvas");
-  //     var ctx = canvas.getContext("2d");
+    window.setInterval(function () {
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
       
-  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //     ctx.font = "12px Arial";
-  //     ctx.fillText(returnCurrentTimeStamp(), 5, 15);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = "12px Arial";
+      ctx.fillText(returnCurrentTimeStamp(), 5, 15);
     
-  //   }, 60000);
-  // },
+    }, 60000);
+  },
 };
 </script>
 
