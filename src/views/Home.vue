@@ -1,138 +1,136 @@
 <template>
-  <!-- <div>
-    <button id="leave_btn" class="red_btn" style="margin: 10px">Sair</button>
-  </div> -->
-
-  <div class="container">
-    <div class="container h-100">
-      <div class="row">
-        <div class="col-3">
-          <form action="/Login.vue">
-          <button action id="leave_btn" class="red_btn" style="margin: 10px">
+  <div>
+    <div style="float: left;">
+      <router-link to="/">
+          <button id="leave_btn" class="red_btn" style="left: 10px;">
             Sair
           </button>
-          </form>
-          
-          <br /><br /><br /><br /><br />
-          <br /><br /><br /><br /><br />
-
-          <div class="main_menu">
-            <p style="font-size: 21px; font-weight: 500">
-              <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu Principal</b>
+      </router-link><br /><br /><br /><br /><br /><br /><br /><br />
+          <p style="font-size: 21px; font-weight: 500; color: grey;">
+              <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu Principal</u></b>
             </p>
 
-            <br /><br /><br />
 
-            <button id="company_btn" class="blue_btn" style="margin: 10px">
-              Empresa
-            </button>
-            <br /><br /><br />
+      <br />
+      <router-link to="/empresa">
+          <button id="company_btn" class="blue_btn">
+             Empresa
+          </button>
+      </router-link><br/><br/>
 
-            <button id="employees_btn" class="blue_btn" style="margin: 10px">
+      <router-link to="/" style="margin-left: 15px;">
+          <button id="employees_btn" class="blue_btn">
               Funcionários
-            </button>
-            <br /><br /><br />
+          </button>
+      </router-link><br/><br/>
 
-            <button id="restrictions_btn" class="blue_btn" style="margin: 10px">
+      <router-link to="/" style="margin-left: 30px;">
+          <button id="restrictions_btn" class="blue_btn">
               Restrições
-            </button>
-            <br /><br /><br />
+          </button>
+      </router-link><br/><br/>
 
-            <button id="alerts_btn" class="blue_btn" style="margin: 10px">
+      <router-link to="/" style="margin-left: 45px;">
+          <button id="alerts_btn" class="blue_btn">
               Avisos
-            </button>
-            <br /><br /><br />
+          </button>
+      </router-link><br/><br/>
 
-            <button id="metrics_btn" class="blue_btn" style="margin: 10px">
+      <router-link to="/" style="margin-left: 60px;">
+          <button id="metrics_btn" class="blue_btn">
               Indicadores
-            </button>
-            <br /><br /><br />
+          </button>
+      </router-link><br/><br/>
 
-            <button id="logs_btn" class="blue_btn" style="margin: 10px">
+      <router-link to="/" style="margin-left: 75px;">
+          <button id="logs_btn" class="blue_btn">
               Registros
-            </button>
-          </div>
-        </div>
-
-        <div class="col-9">
-          <br />
-
-          <canvas id="canvas" width="1045px" height="664.5%"></canvas>
-
-          <!-- Canvas goes here -->
-        </div>
-      </div>
+          </button>
+      </router-link>
+    </div>
+    
+    <div style="float: right;">
+      <canvas id="canvas" width="1100" height="600">
+      </canvas>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  methods: {},
+  // methods: {
+ 
+  // },
 
-  mounted() {
-    function returnCurrentTimeStamp() {
-      // Obtém a data/hora atual
-      var data = new Date();
+  // mounted() {
 
-      // Guarda cada pedaço em uma variável
-      var dia = data.getDate(); // 1-31
-      var mes = data.getMonth(); // 0-11 (zero=janeiro)
-      var ano4 = data.getFullYear(); // 4 dígitos
-      var hora = data.getHours(); // 0-23
-      var min = data.getMinutes(); // 0-59
-      //var seg     = data.getSeconds();        // 0-59
+  //   function returnCurrentTimeStamp() {
+  //     // Obtém a data/hora atual
+  //     var data = new Date();
 
-      /* inserir um 0 em dias/meses/horas/minutos com um só digito ;) */
-      mes = mes + 1;
-      if (String(dia).length == 1) dia = "0" + dia;
-      if (String(mes).length == 1) mes = "0" + mes;
-      if (String(hora).length == 1) hora = "0" + hora;
-      if (String(min).length == 1) min = "0" + min;
+  //     // Guarda cada pedaço em uma variável
+  //     var dia = data.getDate(); // 1-31
+  //     var mes = data.getMonth(); // 0-11 (zero=janeiro)
+  //     var ano4 = data.getFullYear(); // 4 dígitos
+  //     var hora = data.getHours(); // 0-23
+  //     var min = data.getMinutes(); // 0-59
+  //     //var seg     = data.getSeconds();        // 0-59
 
-      // Formata a data e a hora (note o mês + 1)
-      var str_data = dia + "/" + (mes) + "/" + ano4;
-      var str_hora = hora + ":" + min;
+  //     /* inserir um 0 em dias/meses/horas/minutos com um só digito ;) */
+  //     mes = mes + 1;
+  //     if (String(dia).length == 1) dia = "0" + dia;
+  //     if (String(mes).length == 1) mes = "0" + mes;
+  //     if (String(hora).length == 1) hora = "0" + hora;
+  //     if (String(min).length == 1) min = "0" + min;
 
-      // Mostra o resultado
-      return str_data + " " + str_hora;
-    }
+  //     // Formata a data e a hora (note o mês + 1)
+  //     var str_data = dia + "/" + (mes) + "/" + ano4;
+  //     var str_hora = hora + ":" + min;
 
-      var canvas = document.getElementById("canvas");
-      var ctx = canvas.getContext("2d");
+  //     // Mostra o resultado
+  //     return str_data + " " + str_hora;
+  //   }
+
+  //     var canvas = document.getElementById("canvas");
+  //     var ctx = canvas.getContext("2d");
+
+  //     var img = new Image();
+  // img.onload = function() {
+  //   ctx.drawImage(img, 0, 0);
+  // };
+  // img.src = '/assets/gwagwa.png';
       
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "12px Arial";
-      ctx.fillText(returnCurrentTimeStamp(), 5, 15);
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //     ctx.font = "12px Arial";
+  //     ctx.fillText(returnCurrentTimeStamp(), 5, 15);
 
-    window.setInterval(function () {
-      var canvas = document.getElementById("canvas");
-      var ctx = canvas.getContext("2d");
+  //   window.setInterval(function () {
+  //     var canvas = document.getElementById("canvas");
+  //     var ctx = canvas.getContext("2d");
       
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "12px Arial";
-      ctx.fillText(returnCurrentTimeStamp(), 5, 15);
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //     ctx.font = "12px Arial";
+  //     ctx.fillText(returnCurrentTimeStamp(), 5, 15);
     
-    }, 60000);
-  },
+  //   }, 60000);
+  // },
 };
 </script>
 
 <style scoped>
-* {
-  position: absolute;
-  background-color: #f6f6f6;
-  vertical-align: top;
-  color: black;
-}
-
 #canvas {
-  position: absolute !important;
+  /* position: absolute !important;
 
   left: 505px !important;
-  top: 25px;
+  top: 25px; */
+  position: fixed;
+  left: 26%;
+  top: 9%;
+
   border: 0.5px solid grey;
   box-shadow: 0 0 5px grey;
+  /*margin: 10%;*/
+  
 }
 
 .red_btn {
@@ -147,7 +145,7 @@ export default {
   color: white;
   cursor: pointer;
   text-align: center;
-  margin: 10px;
+  /*margin: 10px;*/
   background-position: left;
   background-repeat: no-repeat;
   background-size: contain;
@@ -170,7 +168,8 @@ export default {
   color: white;
   cursor: pointer;
   text-align: left;
-  margin: 10px;
+  /*margin: 10px;*/
+  margin-left: 20px;
   background-position: left;
   background-repeat: no-repeat;
   background-size: contain;
@@ -180,18 +179,11 @@ export default {
 .blue_btn:hover {
   background-color: #1664ca;
 }
-/*------------------------------------------------------------------------------*/
-
-.main_menu {
-  margin-left: 150px !important;
-  word-break: keep-all;
-  white-space: nowrap;
-}
 
 #leave_btn {
   background-image: url("../assets/leave_icon.png");
-  padding-top: 0;
-  margin-top: 0;
+  top: 15px;
+  left: 15px;
   position: fixed;
   text-align: center;
 }
