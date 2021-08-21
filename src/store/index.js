@@ -20,9 +20,9 @@ export default createStore({
 
     loadEmpresa({ commit }) {
       if (localStorage.getItem('infoEmpresa')) {
-        commit('loadProducts', JSON.parse(localStorage.getItem('infoEmpresa')) );
+        commit('loadEmpresa', JSON.parse(localStorage.getItem('infoEmpresa')) );
       } else {
-        commit('loadEmpresa', undefined)
+        commit('loadEmpresa', null);
       }      
     },
   },

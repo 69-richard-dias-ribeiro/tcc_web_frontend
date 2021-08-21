@@ -9,7 +9,10 @@ import Footer from "@/components/Footer.vue";
 export default {
   components: {
     Footer
-  }
+  },
+  beforeCreate() {
+      this.$store.dispatch('loadEmpresa');
+    },
 }
 </script>
 

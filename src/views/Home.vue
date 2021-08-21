@@ -56,6 +56,7 @@
   </div>
 </template>
 
+
 <script>
 export default {
   methods: {
@@ -93,18 +94,12 @@ export default {
 
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
-
-      var img = new Image();
-  img.onload = function() {
-    ctx.drawImage(img, 0, 0);
-  };
-  img.src = '/assets/gwagwa.png';
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.font = "12px Arial";
       ctx.fillText(returnCurrentTimeStamp(), 5, 15);
 
-    window.setInterval(function () {
+      window.setInterval(function () {
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
       
