@@ -8,6 +8,7 @@ export default createStore({
     editEmpresa(state, empresa) {
       localStorage.setItem('infoEmpresa', JSON.stringify(empresa))
       state.empresa = empresa;
+      alert('Informações salvas com sucesso.');
     },
     loadEmpresa(state, empresa) {
       state.empresa = empresa;
