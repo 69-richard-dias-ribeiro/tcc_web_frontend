@@ -4,7 +4,7 @@
             Voltar
           </button>
       </router-link>
-  <h1 style="position: fixed; left: 150px; top: 50px;color: rgb(85, 85, 85)"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empresa</u></h1>
+  <h1 style="position: fixed; left: 150px; top: 50px; color: grey;"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empresa</u></h1>
   <br /><br /><br /><br /><br /><br />
 
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Inclusão ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -134,7 +134,13 @@
                 class="salvar_btn"
                 @click="editEmpresa();">
                 Salvar
-        </button><br /><br />
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="cancelarEdicaoEmpresa"
+                    class="cancelar_btn"
+                    @click="edicaoHabilitada = false;">
+                    Cancelar
+        </button>
+        <br /><br />
 
   </div>
 </template>
@@ -259,7 +265,29 @@ img {
   background-image: url("../assets/save_icon.png");
 }
 
-.salvar_btn:hover {
+.cancelar_btn {
+  background-color: #1877f2;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 38px;
+  padding: 0 16px;
+  padding-left: 50px;
+  width: 142.5px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  /*margin: 10px;*/
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-blend-mode: lighten;
+  background-image: url("../assets/cancel_icon.png");
+}
+
+
+
+.salvar_btn:hover, .cancelar_btn:hover {
   background-color: #1664ca;
 }
 </style>
