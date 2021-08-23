@@ -37,8 +37,8 @@
       </router-link><br/><br/>
 
       <router-link to="/" style="margin-left: 60px;">
-          <button id="metrics_btn" class="blue_btn">
-              Indicadores
+          <button id="data_btn" class="blue_btn">
+              Dados
           </button>
       </router-link><br/><br/>
 
@@ -203,8 +203,8 @@ export default {
   width: 220px;
 }
 
-#metrics_btn {
-  background-image: url("../assets/metrics_icon.png");
+#data_btn {
+  background-image: url("../assets/data_icon.png");
   width: 220px;
 }
 

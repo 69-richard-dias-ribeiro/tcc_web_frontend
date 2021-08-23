@@ -18,14 +18,12 @@
         <br /><br />
         <label for="endereco">Endereço</label><br />
         <input id="endereco" type="text" v-model="newEmpresa.endereco" />
-        <br /><br /><br />
-        <div style="border: 1px solid black; background-color: rgb(220, 220, 220); 
-                    display: inline; padding: 2.5px; box-shadow: 3px 3px 3px gray;">... *inserção do logotipo aqui* ...</div>
         <br /><br />
+        
 
 
 
-        <h3 style="color: rgb(85, 85, 85)">Definição da localização do terreno - coordenadas</h3>
+        <h3><u>Definição da localização do terreno - coordenadas</u></h3>
         <label for="area_q1">Canto superior direito (ex.: 12,345678)</label><br />
         <input type="number" id="area_q1" v-model="newEmpresa.area[0]" /><br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-1.png" /><br /><br />
@@ -72,14 +70,12 @@
         <br />
         <h4>Endereço</h4>
         {{ empresa.endereco }}
-        <br /><br /><br />
-        <div style="border: 1px solid black; background-color: rgb(220, 220, 220); 
-                    display: inline; padding: 2.5px; box-shadow: 3px 3px 3px gray;">... *logotipo aqui* ...</div>
         <br /><br />
+        
 
 
 
-        <h3 style="color: rgb(85, 85, 85)">Definição da localização do terreno - coordenadas</h3>
+        <h3><u>Definição da localização do terreno - coordenadas</u></h3>
         <h4>Canto superior direito</h4>
         {{ empresa.area[0] }}<br />
         <h4>Canto superior esquerdo</h4>
@@ -100,14 +96,12 @@
         <br /><br />
         <label for="endereco">Endereço</label><br />
         <input id="endereco" type="text" v-model="newEmpresa.endereco" />
-        <br /><br /><br />
-        <div style="border: 1px solid black; background-color: rgb(220, 220, 220); 
-                    display: inline; padding: 2.5px; box-shadow: 3px 3px 3px gray;">... *inserção do logotipo aqui* ...</div>
         <br /><br />
+        
 
 
 
-        <h3 style="color: rgb(85, 85, 85)">Definição da localização do terreno - coordenadas</h3>
+        <h3><u>Definição da localização do terreno - coordenadas</u></h3>
         <label for="area_q1">Canto superior direito (ex.: 12,345678)</label><br />
         <input type="number" id="area_q1" v-model="newEmpresa.area[0]" /><br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-1.png" /><br /><br />
