@@ -37,7 +37,30 @@ export default createStore({
     },
     editDepartamento(state, objForEdition) {
       state.departamentos[objForEdition.idOfNewDepartment].nome = objForEdition.newDepartamento.nome;
-    }
+    },
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+addCargo(state, cargo) {
+  if (state.cargos) {
+      state.cargos.push(cargo);
+      localStorage.setItem('cargos', JSON.stringify(state.cargos));
+  } else {
+      var cargos = [];
+      cargos.push(cargo);
+      state.cargos = cargos;
+      localStorage.setItem('cargos', JSON.stringify(state.cargos));
+  }
+  alert('Cargo adicionado com sucesso.');
+},
+loadCargos(state, cargos) {
+  state.cargos = cargos;
+},
+deleteCargo(state, id) {
+  state.cargos.splice(id, 1);
+  localStorage.setItem('cargos', JSON.stringify(state.cargos));
+},
+editCargo(state, objForEdition) {
+  state.cargos[objForEdition.idOfNewRole].nome = objForEdition.newCargo.nome;
+}
   },
   actions: {
     editEmpresa({ commit }, empresa) {
@@ -74,8 +97,31 @@ export default createStore({
   },
   editDepartamento({ commit }, objForEdition) {
     commit('editDepartamento', objForEdition);
+  },
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+addCargo({ commit }, cargo) {
+
+  if (localStorage.getItem('cargos') &&
+       JSON.parse(localStorage.getItem('cargos')).find(element => element.nome == cargo.nome.trim())) {
+        alert('Erro: cargo já existe.');
+  } else {
+    commit('addCargo', cargo);
   }
-  
+
+},
+loadCargos({ commit }) {
+  if (localStorage.getItem('cargos')) {
+    commit('loadCargos', JSON.parse(localStorage.getItem('cargos')) );
+  } else {
+    commit('loadCargos', null);
+  }      
+},
+deleteCargo({ commit }, id) {
+  commit('deleteCargo', id);
+},
+editCargo({ commit }, objForEdition) {
+  commit('editCargo', objForEdition);
+}
   },
   modules: {
 
