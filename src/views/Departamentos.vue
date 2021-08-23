@@ -22,12 +22,16 @@
       "
     >
       <tr>
-        <th></th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">ID</th>
+        <th style="border-bottom: 2px solid grey;">Nome</th>
         <th></th>
         <th></th>
       </tr>
       <tr v-for="(d, index) in departamentos" :key="index">
-        <td style="padding-right: 15px">
+        <td style="padding-right: 15px; border: 0.25px solid grey;">
+          <b>{{ d.id }}</b>
+        </td>
+        <td style="padding-right: 15px; border: 0.25px solid grey;">
           <b>{{ d.nome }}</b>
         </td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
