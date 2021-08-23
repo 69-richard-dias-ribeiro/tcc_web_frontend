@@ -285,9 +285,11 @@ img {
   background-image: url("../assets/cancel_icon.png");
 }
 
-
-
 .salvar_btn:hover, .cancelar_btn:hover {
   background-color: #1664ca;
+}
+
+.red_btn:hover {
+  background-color: #c22d00;
 }
 </style>

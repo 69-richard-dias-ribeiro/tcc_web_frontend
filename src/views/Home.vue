@@ -18,7 +18,7 @@
           </button>
       </router-link><br/><br/>
 
-      <router-link to="/" style="margin-left: 15px;">
+      <router-link to="/funcionarios" style="margin-left: 15px;">
           <button id="employees_btn" class="blue_btn">
               Funcionários
           </button>
