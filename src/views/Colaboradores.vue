@@ -9,7 +9,7 @@
   <h3 v-if="!colaboradores" style="color: grey">
     Nenhum colaborador encontrado.
   </h3>
-  <button class="add_btn" @click="addColaborador()">
+  <button class="add_btn" @click="listagemInclusaoEdicaoMode = 2;">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adicionar</button
   ><br /><br />
   <div style="display: inline-block">
@@ -54,16 +54,16 @@
           <b>{{ c.email }}</b>
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.dataDeNascimento }}</b>
+          <b>{{ formatarDataPtBR(c.dataNasc) }}</b>
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.dataDeAdmissao }}</b>
+          <b>{{ formatarDataPtBR(c.dataAdmissao) }}</b>
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ departamentos.find(d => d.id == c.departamento).nome }}</b>
+          <b>{{ /*departamentos.find(d => d.id == c.departamento).nome*/c.departamento }}</b>
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ cargos.find(c => c.id == c.cargo).nome }}</b>
+          <b>{{ /*cargos.find(c => c.id == c.cargo).nome*/ c.cargo }}</b>
         </td>
         
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -93,10 +93,48 @@
 
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Inclusão ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<div v-if="listagemInclusaoEdicaoMode == 2">
-<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||||||||||||||||||| Formulário de inclusão aqui ;) ||||||||||||||||||||
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<div v-if="listagemInclusaoEdicaoMode == 2"><br /><br />
+      <label for="matricula">Matrícula:</label><br />
+      <input type="text" id="matricula" v-model="newColaborador.matricula" />
+      <br /><br />
+      <label for="nome">Nome:</label><br />
+      <input type="text" id="nome" v-model="newColaborador.nome" />
+      <br /><br />
+      <label for="email">E-mail:</label><br />
+      <input type="text" id="email" v-model="newColaborador.email" />
+      <br /><br />
+      <label for="telefone">Telefone:</label><br />
+      <input type="text" id="telefone" v-model="newColaborador.telefone" />
+      <br /><br />
+      <label for="data_nasc">Data de nascimento:</label><br />
+      <input type="date" id="data_nasc" v-model="newColaborador.dataNasc" />
+      <br /><br />
+      <label for="data_admissao">Data de admissão:</label><br />
+      <input type="date" id="data_admissao" v-model="newColaborador.dataAdmissao" />
+      <br /><br />
+      <label for="departamento">Departamento:</label><br />
+      <select id="departamento" v-model="newColaborador.departamento">
+          <option v-for="(d, index) in departamentos" :key="index" :value="d.id">{{d.nome}}</option>
+      </select>
+      <br /><br />
+      <label for="cargo">Cargo:</label><br />
+      <select id="cargo" v-model="newColaborador.cargo">
+          <option v-for="(c, index) in cargos" :key="index" :value="c.id">{{c.nome}}</option>
+      </select>
+      <br /><br /><br /><br />
+
+      
+      <button id="addColaborador"
+                class="salvar_btn"
+                @click="addColaborador();">
+                Salvar
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="cancelarEdicaoEmpresa"
+                    class="cancelar_btn"
+                    @click="resetarFormularios();">
+                    Cancelar
+        </button>
+        <br /><br />
 </div>
 
 
@@ -104,7 +142,7 @@
 
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Edição ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<div v-if="listagemInclusaoEdicaoMode == 3">
+<div v-if="listagemInclusaoEdicaoMode == 3">*Edição*
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||| Formulário de edição aqui ;) ||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -117,10 +155,25 @@
 export default {
     data() {
         return {
-            // 1: listagem
-            // 2: inclusão
-            // 3: edição
-            listagemInclusaoEdicaoMode: 1
+            /* 
+               1: listagem
+               2: inclusão
+               3: edição
+            */
+            listagemInclusaoEdicaoMode: 1,
+            newColaborador:
+            {
+                id: -1,
+                matricula: '',
+                nome: '',
+                email: '',
+                telefone: '',
+                dataNasc: null,
+                dataAdmissao: null,
+                departamento: null,
+                cargo: null,
+                usuário: null
+            }
         }
     },
     computed: {
@@ -129,20 +182,55 @@ export default {
     },
     departamentos: function () {
         return this.$store.state.departamentos;
+    },
+    colaboradores: function () {
+      return this.$store.state.colaboradores;
     }
   },
   beforeCreate() {
     this.$store.dispatch("loadColaboradores");
+    this.$store.dispatch("loadDepartamentos");
+    this.$store.dispatch("loadCargos");
   },
   methods: {
-    //   addColaborador() {
-
-    //   }
+    formatarDataPtBR(data) {
+      var data_arr = data.split('-');
+      return data_arr[2] + "/" + data_arr[1] + "/" + data_arr[0];
+    },
+    resetarFormularios() {
+      this.listagemInclusaoEdicaoMode = 1;
+      this.newColaborador = 
+      {
+                id: -1,
+                matricula: '',
+                nome: '',
+                email: '',
+                telefone: '',
+                dataNasc: null,
+                dataAdmissao: null,
+                departamento: null,
+                cargo: null,
+                usuário: null
+      }
+    },
+    addColaborador() {
+      this.$store.dispatch('addColaborador', this.newColaborador);
+      this.resetarFormularios();
+    }
   }
 }
 </script>
 
 <style scoped>
+label {
+  font-weight: bolder;
+}
+
+input {
+  padding-left: 60px;
+  box-shadow: 0 0 2px gray;
+}
+
 .add_btn {
   background-color: rgb(0, 194, 0);
   border: none;
@@ -242,5 +330,49 @@ export default {
 
 .delete_btn:hover {
   background-color: #c22d00;
+}
+
+.salvar_btn {
+  background-color: #1877f2;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 38px;
+  padding: 0 16px;
+  padding-left: 50px;
+  width: 120px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  /*margin: 10px;*/
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-blend-mode: lighten;
+  background-image: url("../assets/save_icon.png");
+}
+
+.cancelar_btn {
+  background-color: #1877f2;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 38px;
+  padding: 0 16px;
+  padding-left: 50px;
+  width: 142.5px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  /*margin: 10px;*/
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-blend-mode: lighten;
+  background-image: url("../assets/cancel_icon.png");
+}
+
+.salvar_btn:hover, .cancelar_btn:hover {
+  background-color: #1664ca;
 }
 </style>

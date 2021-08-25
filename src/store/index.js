@@ -4,9 +4,12 @@ export default createStore({
   state: {
     empresa: {},
     departamentos: [],
-    cargos: []
+    cargos: [],
+    colaboradores: []
   },
   mutations: {
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Empresa mutations
     editEmpresa(state, empresa) {
       localStorage.setItem('infoEmpresa', JSON.stringify(empresa))
       state.empresa = empresa;
@@ -16,6 +19,7 @@ export default createStore({
       state.empresa = empresa;
     },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Departamento/Departamentos mutations
     addDepartamento(state, departamento) {
       if (state.departamentos) {
           state.departamentos.push(departamento);
@@ -39,6 +43,7 @@ export default createStore({
       state.departamentos[objForEdition.idOfNewDepartment].nome = objForEdition.newDepartamento.nome;
     },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Cargo/Cargos mutations
 addCargo(state, cargo) {
   if (state.cargos) {
       state.cargos.push(cargo);
@@ -60,9 +65,28 @@ deleteCargo(state, id) {
 },
 editCargo(state, objForEdition) {
   state.cargos[objForEdition.idOfNewRole].nome = objForEdition.newCargo.nome;
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Colaborador/Colaboradores mutations
+addColaborador(state, newColaborador) {
+  if (state.colaboradores) {
+    state.colaboradores.push(newColaborador);
+    localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
+  } else {
+    var colaboradores = [];
+    colaboradores.push(newColaborador);
+    state.colaboradores = colaboradores;
+    localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
+  }
+  alert('Colaborador adicionado com sucesso.');
+},
+loadColaboradores(state, colaboradores) {
+  state.colaboradores = colaboradores;
 }
   },
   actions: {
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Empresa actions
     editEmpresa({ commit }, empresa) {
       commit('editEmpresa', empresa);
     },
@@ -75,6 +99,7 @@ editCargo(state, objForEdition) {
       }      
     },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Departamento/Departamentos actions
   addDepartamento({ commit }, departamento) {
 
     if (localStorage.getItem('departamentos') &&
@@ -99,6 +124,7 @@ editCargo(state, objForEdition) {
     commit('editDepartamento', objForEdition);
   },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Cargo/Cargos actions
 addCargo({ commit }, cargo) {
 
   if (localStorage.getItem('cargos') &&
@@ -121,8 +147,26 @@ deleteCargo({ commit }, id) {
 },
 editCargo({ commit }, objForEdition) {
   commit('editCargo', objForEdition);
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Colaborador/Colaboradores actions
+addColaborador({ commit }, newColaborador) {
+  if (localStorage.getItem('colaboradores') &&
+       JSON.parse(localStorage.getItem('colaboradores')).find(element => element.matricula == newColaborador.matricula.trim())) {
+        alert('Erro: matrícula repetida.');
+  } else {
+    commit('addColaborador', newColaborador);
+  }
+},
+loadColaboradores({ commit }) {
+  if (localStorage.getItem('colaboradores')) {
+    commit('loadColaboradores', JSON.parse(localStorage.getItem('colaboradores')) );
+  } else {
+    commit('loadColaboradores', null);
+  } 
 }
-  },
+
+},
   modules: {
 
   }
