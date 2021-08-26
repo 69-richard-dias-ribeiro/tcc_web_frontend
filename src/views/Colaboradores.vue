@@ -27,43 +27,44 @@
         border-collapse: separate;
         border-spacing: 0 15px;
       "
-    >
+    ><thead>
       <tr>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">ID</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Matrícula</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Nome</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">E-mail</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Data de nascimento</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Data de admissão</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Departamento</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Cargo</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">ID</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Matrícula</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Nome</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">E-mail</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Data de nascimento</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Data de admissão</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Departamento</th>
+        <th style="border-bottom: 2px solid grey; padding: 0 10px;">Cargo</th>
         <th></th>
         <th></th>
-      </tr>
+      </tr></thead>
+      <tbody>
       <tr v-for="(c, index) in colaboradores" :key="index">
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.id }}</b>
+          {{ c.id }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.matricula }}</b>
+          {{ c.matricula }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.nome }}</b>
+          {{ c.nome }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.email }}</b>
+          {{ c.email }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ formatarDataPtBR(c.dataNasc) }}</b>
+          {{ formatarDataPtBR(c.dataNasc) }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ formatarDataPtBR(c.dataAdmissao) }}</b>
+          {{ formatarDataPtBR(c.dataAdmissao) }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ /*departamentos.find(d => d.id == c.departamento).nome*/c.departamento }}</b>
+          {{ departamentos.find(departamento => { return departamento.id == c.departamento }).nome }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ /*cargos.find(c => c.id == c.cargo).nome*/ c.cargo }}</b>
+          {{ cargos.find(cargo => { return cargo.id == c.cargo }).nome }}
         </td>
         
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -84,7 +85,7 @@
             Excluir
           </button>
         </td>
-      </tr>
+      </tr></tbody>
     </table>
 </div>
 

@@ -22,17 +22,17 @@
       "
     >
       <tr>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">ID</th>
-        <th style="border-bottom: 2px solid grey;">Nome</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">ID</th>
+        <th style="border-bottom: 2px solid grey; padding: 0 10px;">Nome</th>
         <th></th>
         <th></th>
       </tr>
       <tr v-for="(c, index) in cargos" :key="index">
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.id }}</b>
+          {{ c.id }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          <b>{{ c.nome }}</b>
+          {{ c.nome }}
         </td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <td>
