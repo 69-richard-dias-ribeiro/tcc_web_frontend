@@ -31,8 +31,8 @@
       </router-link><br/><br/>
 
       <router-link to="/" style="margin-left: 45px;">
-          <button id="alerts_btn" class="blue_btn">
-              Avisos
+          <button id="areas_btn" class="blue_btn">
+              Áreas
           </button>
       </router-link><br/><br/>
 
@@ -198,8 +198,8 @@ export default {
   width: 220px;
 }
 
-#alerts_btn {
-  background-image: url("../assets/alerts_icon.png");
+#areas_btn {
+  background-image: url("../assets/areas_icon.png");
   width: 220px;
 }
 

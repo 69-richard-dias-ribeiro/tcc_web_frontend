@@ -39,8 +39,8 @@ export default createStore({
       state.departamentos.splice(id, 1);
       localStorage.setItem('departamentos', JSON.stringify(state.departamentos));
     },
-    editDepartamento(state, objForEdition) {
-      state.departamentos[objForEdition.idOfNewDepartment].nome = objForEdition.newDepartamento.nome;
+    editDepartamento(state, objForEditing) {
+      state.departamentos[objForEditing.idOfNewDepartment].nome = objForEditing.newDepartamento.nome;
     },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Cargo/Cargos mutations
@@ -63,8 +63,8 @@ deleteCargo(state, id) {
   state.cargos.splice(id, 1);
   localStorage.setItem('cargos', JSON.stringify(state.cargos));
 },
-editCargo(state, objForEdition) {
-  state.cargos[objForEdition.idOfNewRole].nome = objForEdition.newCargo.nome;
+editCargo(state, objForEditing) {
+  state.cargos[objForEditing.idOfNewRole].nome = objForEditing.newCargo.nome;
 },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Colaborador/Colaboradores mutations
@@ -79,9 +79,16 @@ addColaborador(state, newColaborador) {
     localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
   }
   alert('Colaborador adicionado com sucesso.');
-},
+},  
 loadColaboradores(state, colaboradores) {
   state.colaboradores = colaboradores;
+},
+editColaborador(state, objForEditing) {
+  state.colaboradores[objForEditing.idOfNewColaborador] = objForEditing.colaboradorForEditing;
+},
+deleteColaborador(state, id) {
+  state.colaboradores.splice(id, 1);
+  localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
 }
   },
   actions: {
@@ -120,8 +127,8 @@ loadColaboradores(state, colaboradores) {
   deleteDepartamento({ commit }, id) {
     commit('deleteDepartamento', id);
   },
-  editDepartamento({ commit }, objForEdition) {
-    commit('editDepartamento', objForEdition);
+  editDepartamento({ commit }, objForEditing) {
+    commit('editDepartamento', objForEditing);
   },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Cargo/Cargos actions
@@ -145,8 +152,8 @@ loadCargos({ commit }) {
 deleteCargo({ commit }, id) {
   commit('deleteCargo', id);
 },
-editCargo({ commit }, objForEdition) {
-  commit('editCargo', objForEdition);
+editCargo({ commit }, objForEditing) {
+  commit('editCargo', objForEditing);
 },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Colaborador/Colaboradores actions
@@ -164,8 +171,13 @@ loadColaboradores({ commit }) {
   } else {
     commit('loadColaboradores', null);
   } 
+},
+editColaborador({ commit }, objForEditing) {
+  commit('editColaborador', objForEditing);
+},
+deleteColaborador({ commit }, id) {
+  commit('deleteColaborador', id);
 }
-
 },
   modules: {
 

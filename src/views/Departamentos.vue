@@ -6,7 +6,7 @@
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Departamentos</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!departamentos" style="color: grey">
+  <h3 v-if="!departamentos || departamentos.length <= 0" style="color: grey">
     Nenhum departamento encontrado.
   </h3>
   <button class="add_btn" @click="addDepartamento()">
@@ -14,7 +14,7 @@
   ><br /><br />
   <div style="display: inline-block">
     <table
-      v-if="departamentos"
+      v-if="departamentos && departamentos.length > 0"
       style="
         text-align: center;
         border-collapse: separate;
@@ -77,7 +77,7 @@ export default {
 
       if (resp) {
 
-        var objForEdition = {
+        var objForEditing = {
           newDepartamento: { 
                              id: -1, 
                              nome: resp, 
@@ -85,7 +85,7 @@ export default {
           idOfNewDepartment: idItemASerEditado,
         };
 
-        this.$store.dispatch("editDepartamento", objForEdition);
+        this.$store.dispatch("editDepartamento", objForEditing);
       }
     }
   },

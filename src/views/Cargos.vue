@@ -6,7 +6,7 @@
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cargos</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!cargos" style="color: grey">
+  <h3 v-if="!cargos || cargos.length == 0" style="color: grey">
     Nenhum cargo encontrado.
   </h3>
   <button class="add_btn" @click="addCargo()">
@@ -14,7 +14,7 @@
   ><br /><br />
   <div style="display: inline-block">
     <table
-      v-if="cargos"
+      v-if="cargos && cargos.length > 0"
       style="
         text-align: center;
         border-collapse: separate;
@@ -77,7 +77,7 @@ export default {
 
       if (resp) {
 
-        var objForEdition = {
+        var objForEditing = {
           newCargo: { 
                              id: -1, 
                              nome: resp, 
@@ -85,7 +85,7 @@ export default {
           idOfNewRole: idItemASerEditado,
         };
 
-        this.$store.dispatch("editCargo", objForEdition);
+        this.$store.dispatch("editCargo", objForEditing);
       }
     }
   },

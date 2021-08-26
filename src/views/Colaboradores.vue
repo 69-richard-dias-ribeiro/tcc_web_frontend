@@ -6,7 +6,7 @@
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Colaboradores</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!colaboradores" style="color: grey">
+  <h3 v-if="!colaboradores || colaboradores.length <= 0" style="color: grey">
     Nenhum colaborador encontrado.
   </h3>
   <button class="add_btn" @click="listagemInclusaoEdicaoMode = 2;">
@@ -19,7 +19,7 @@
 
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Listagem ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <div v-if="colaboradores && listagemInclusaoEdicaoMode == 1">
+    <div v-if="colaboradores && colaboradores.length > 0 && listagemInclusaoEdicaoMode == 1">
     <table
       v-if="colaboradores"
       style="
@@ -27,20 +27,19 @@
         border-collapse: separate;
         border-spacing: 0 15px;
       "
-    ><thead>
+    >
       <tr>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">ID</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Matrícula</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Nome</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">E-mail</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Data de nascimento</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Data de admissão</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey; padding: 0 10px;">Departamento</th>
-        <th style="border-bottom: 2px solid grey; padding: 0 10px;">Cargo</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">ID</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Matrícula</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Nome</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">E-mail</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Data de nascimento</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Data de admissão</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Departamento</th>
+        <th style="border-bottom: 2px solid grey;">Cargo</th>
         <th></th>
         <th></th>
-      </tr></thead>
-      <tbody>
+      </tr>
       <tr v-for="(c, index) in colaboradores" :key="index">
         <td style="padding-right: 15px; border: 0.25px solid grey;">
           {{ c.id }}
@@ -71,7 +70,7 @@
         <td>
           <button
             class="edit_btn"
-            @click="editDepartamento(d.nome, departamentos.indexOf(d))"
+            @click="prepararFormEdicao(c);"
           >
             Editar
           </button>
@@ -80,12 +79,12 @@
         <td>
           <button
             class="delete_btn"
-            @click="deleteDepartamento(d.nome, departamentos.indexOf(d))"
+            @click="deleteColaborador(c.nome, colaboradores.indexOf(c));"
           >
             Excluir
           </button>
         </td>
-      </tr></tbody>
+      </tr>
     </table>
 </div>
 
@@ -143,10 +142,48 @@
 
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Edição ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<div v-if="listagemInclusaoEdicaoMode == 3">*Edição*
-<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||||||||||||||||||| Formulário de edição aqui ;) ||||||||||||||||||||
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<div v-if="listagemInclusaoEdicaoMode == 3"><br /><br />
+      <label for="matricula_edit">Matrícula:</label><br />
+      <input type="text" id="matricula_edit" v-model="newColaborador.matricula" />
+      <br /><br />
+      <label for="nome_edit">Nome:</label><br />
+      <input type="text" id="nome_edit" v-model="newColaborador.nome" />
+      <br /><br />
+      <label for="email_edit">E-mail:</label><br />
+      <input type="text" id="email_edit" v-model="newColaborador.email" />
+      <br /><br />
+      <label for="telefone_edit">Telefone:</label><br />
+      <input type="text" id="telefone_edit" v-model="newColaborador.telefone" />
+      <br /><br />
+      <label for="data_nasc_edit">Data de nascimento:</label><br />
+      <input type="date" id="data_nasc_edit" v-model="newColaborador.dataNasc" />
+      <br /><br />
+      <label for="data_admissao_edit">Data de admissão:</label><br />
+      <input type="date" id="data_admissao_edit" v-model="newColaborador.dataAdmissao" />
+      <br /><br />
+      <label for="departamento_edit">Departamento:</label><br />
+      <select id="departamento_edit" v-model="newColaborador.departamento">
+          <option v-for="(d, index) in departamentos" :key="index" :value="d.id">{{d.nome}}</option>
+      </select>
+      <br /><br />
+      <label for="cargo_edit">Cargo:</label><br />
+      <select id="cargo_edit" v-model="newColaborador.cargo">
+          <option v-for="(c, index) in cargos" :key="index" :value="c.id">{{c.nome}}</option>
+      </select>
+      <br /><br /><br /><br />
+
+      
+      <button id="editColaborador"
+                class="salvar_btn"
+                @click="editColaborador();">
+                Salvar
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="cancelarEdicaoColaborador"
+                    class="cancelar_btn"
+                    @click="resetarFormularios();">
+                    Cancelar
+        </button>
+        <br /><br />
 </div>
 
   </div>
@@ -172,8 +209,7 @@ export default {
                 dataNasc: null,
                 dataAdmissao: null,
                 departamento: null,
-                cargo: null,
-                usuário: null
+                cargo: null
             }
         }
     },
@@ -210,13 +246,41 @@ export default {
                 dataNasc: null,
                 dataAdmissao: null,
                 departamento: null,
-                cargo: null,
-                usuário: null
+                cargo: null
+      }
+    },
+    prepararFormEdicao(colaborador) {
+      this.listagemInclusaoEdicaoMode = 3;
+      this.indexOfColaboradorASerEditado = this.colaboradores.indexOf(colaborador);
+      this.newColaborador = {
+                id: colaborador.id,
+                matricula: colaborador.matricula,
+                nome: colaborador.nome,
+                email: colaborador.email,
+                telefone: colaborador.telefone,
+                dataNasc: colaborador.dataNasc,
+                dataAdmissao: colaborador.dataAdmissao,
+                departamento: colaborador.departamento,
+                cargo: colaborador.cargo
       }
     },
     addColaborador() {
       this.$store.dispatch('addColaborador', this.newColaborador);
       this.resetarFormularios();
+    },
+    editColaborador() {
+      var objForEditing = {
+          colaboradorForEditing: this.newColaborador,
+          idOfNewColaborador: this.indexOfColaboradorASerEditado,
+        };
+
+        this.$store.dispatch("editColaborador", objForEditing);
+        this.resetarFormularios();
+    },
+    deleteColaborador(nome, id) {
+      if (confirm('Confirma a exclusão do(a) colaborador(a) ' + nome + '?')) {
+        this.$store.dispatch("deleteColaborador", id);
+      }
     }
   }
 }
