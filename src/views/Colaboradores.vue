@@ -129,7 +129,7 @@
                 @click="addColaborador();">
                 Salvar
         </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button id="cancelarEdicaoEmpresa"
+        <button id="cancelarEdicaoUsuario"
                     class="cancelar_btn"
                     @click="resetarFormularios();">
                     Cancelar

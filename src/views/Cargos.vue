@@ -6,7 +6,7 @@
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cargos</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!cargos || cargos.length == 0" style="color: grey">
+  <h3 v-if="!cargos || cargos.length <= 0" style="color: grey">
     Nenhum cargo encontrado.
   </h3>
   <button class="add_btn" @click="addCargo()">

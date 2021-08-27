@@ -5,7 +5,8 @@ export default createStore({
     empresa: {},
     departamentos: [],
     cargos: [],
-    colaboradores: []
+    colaboradores: [],
+    usuarios: []
   },
   mutations: {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,6 +90,30 @@ editColaborador(state, objForEditing) {
 deleteColaborador(state, id) {
   state.colaboradores.splice(id, 1);
   localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Usuário/Usuários mutations
+addUsuario(state, newUsuario) {
+  if (state.usuarios) {
+    state.usuarios.push(newUsuario);
+    localStorage.setItem('usuarios', JSON.stringify(state.usuarios));
+  } else {
+    var usuarios = [];
+    usuarios.push(newUsuario);
+    state.usuarios = usuarios;
+    localStorage.setItem('usuarios', JSON.stringify(state.usuarios));
+  }
+  alert('Usuário adicionado com sucesso.');
+},  
+loadUsuarios(state, usuarios) {
+  state.usuarios = usuarios;
+},
+editUsuario(state, objForEditing) {
+  state.usuarios[objForEditing.idOfNewUsuario] = objForEditing.usuarioForEditing;
+},
+deleteUsuario(state, id) {
+  state.usuarios.splice(id, 1);
+  localStorage.setItem('usuarios', JSON.stringify(state.usuarios));
 }
   },
   actions: {
@@ -177,6 +202,29 @@ editColaborador({ commit }, objForEditing) {
 },
 deleteColaborador({ commit }, id) {
   commit('deleteColaborador', id);
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Usuário/Usuários actions
+addUsuario({ commit }, newUsuario) {
+  if (localStorage.getItem('usuarios') &&
+       JSON.parse(localStorage.getItem('usuarios')).find(element => element.usuario == newUsuario.usuario)) {
+        alert('Erro: usuário já existe.');
+  } else {
+    commit('addUsuario', newUsuario);
+  }
+},
+loadUsuarios({ commit }) {
+  if (localStorage.getItem('usuarios')) {
+    commit('loadUsuarios', JSON.parse(localStorage.getItem('usuarios')) );
+  } else {
+    commit('loadUsuarios', null);
+  } 
+},
+editUsuario({ commit }, objForEditing) {
+  commit('editUsuario', objForEditing);
+},
+deleteUsuario({ commit }, id) {
+  commit('deleteUsuario', id);
 }
 },
   modules: {

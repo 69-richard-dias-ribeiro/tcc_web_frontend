@@ -10,8 +10,13 @@
   <div class="options">
     <div style="display: inline-block"> 
 
+    <router-link to="/funcionarios/usuarios">
+    <button id="opt1" class="blue_btn users_btn" style="float: left">
+      Usuários
+    </button></router-link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
     <router-link to="/funcionarios/colaboradores">
-    <button id="opt1" class="blue_btn collaborators_btn" style="float: left">
+    <button id="opt1" class="blue_btn collaborators_btn" style="float: none">
       Colaboradores
     </button></router-link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -107,5 +112,13 @@ margin: 15% 10%;
   background-size: contain;
   background-blend-mode: lighten;
   background-image: url("../assets/collaborator_icon.png");
+}
+
+.users_btn {
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-blend-mode: lighten;
+  background-image: url("../assets/user_icon.png");
 }
 </style>

@@ -3,6 +3,7 @@ import Login from '../views/Login.vue';
 import Home from '../views/Home.vue';
 import Empresa from '../views/Empresa.vue';
 import FuncionariosOptions from '../views/FuncionariosOptions.vue';
+import Usuarios from '../views/Usuarios.vue';
 import Colaboradores from '../views/Colaboradores.vue';
 import Departamentos from '../views/Departamentos.vue';
 import Cargos from '../views/Cargos.vue';
@@ -27,6 +28,11 @@ const routes = [
     path: '/funcionarios',
     name: 'Funcionarios',
     component: FuncionariosOptions
+  },
+  {
+    path: '/funcionarios/usuarios',
+    name: 'Usuarios',
+    component: Usuarios
   },
   {
     path: '/funcionarios/colaboradores',
