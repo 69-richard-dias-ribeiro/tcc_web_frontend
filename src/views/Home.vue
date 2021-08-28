@@ -30,7 +30,7 @@
           </button>
       </router-link><br/><br/>
 
-      <router-link to="/" style="margin-left: 45px;">
+      <router-link to="/areas" style="margin-left: 45px;">
           <button id="areas_btn" class="blue_btn">
               Áreas
           </button>

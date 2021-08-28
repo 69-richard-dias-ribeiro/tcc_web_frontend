@@ -6,7 +6,8 @@ export default createStore({
     departamentos: [],
     cargos: [],
     colaboradores: [],
-    usuarios: []
+    usuarios: [],
+    areas: []
   },
   mutations: {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,8 +115,32 @@ editUsuario(state, objForEditing) {
 deleteUsuario(state, id) {
   state.usuarios.splice(id, 1);
   localStorage.setItem('usuarios', JSON.stringify(state.usuarios));
-}
-  },
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Usuário/Usuários mutations
+addArea(state, newArea) {
+  if (state.areas) {
+    state.areas.push(newArea);
+    localStorage.setItem('areas', JSON.stringify(state.areas));
+  } else {
+    var areas = [];
+    areas.push(newArea);
+    state.areas = areas;
+    localStorage.setItem('areas', JSON.stringify(state.areas));
+  }
+  alert('Área adicionada com sucesso.');
+},  
+loadAreas(state, areas) {
+  state.areas = areas;
+},
+editArea(state, objForEditing) {
+  state.areas[objForEditing.idOfNewArea] = objForEditing.areaForEditing;
+},
+deleteArea(state, id) {
+  state.areas.splice(id, 1);
+  localStorage.setItem('areas', JSON.stringify(state.areas));
+  }
+},
   actions: {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Empresa actions
@@ -225,6 +250,29 @@ editUsuario({ commit }, objForEditing) {
 },
 deleteUsuario({ commit }, id) {
   commit('deleteUsuario', id);
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Área/áreas actions
+addArea({ commit }, newArea) {
+  if (localStorage.getItem('areas') &&
+       JSON.parse(localStorage.getItem('areas')).find(element => element.titulo == newArea.titulo.trim())) {
+        alert('Erro: o título inserido já existe.');
+  } else {
+    commit('addArea', newArea);
+  }
+},
+loadAreas({ commit }) {
+  if (localStorage.getItem('areas')) {
+    commit('loadAreas', JSON.parse(localStorage.getItem('areas')) );
+  } else {
+    commit('loadAreas', null);
+  } 
+},
+editArea({ commit }, objForEditing) {
+  commit('editArea', objForEditing);
+},
+deleteArea({ commit }, id) {
+  commit('deleteArea', id);
 }
 },
   modules: {

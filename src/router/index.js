@@ -7,6 +7,7 @@ import Usuarios from '../views/Usuarios.vue';
 import Colaboradores from '../views/Colaboradores.vue';
 import Departamentos from '../views/Departamentos.vue';
 import Cargos from '../views/Cargos.vue';
+import Areas from '../views/Areas.vue';
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/funcionarios/cargos',
     name: 'Cargos',
     component: Cargos
+  },
+  {
+    path: '/areas',
+    name: 'Areas',
+    component: Areas
   },
   // {
   //   path: '/about',
