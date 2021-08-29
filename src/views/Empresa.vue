@@ -25,30 +25,50 @@
 
         <h3><u>Definição da localização do terreno - coordenadas</u></h3>
         <label for="area_q1">Canto superior direito (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q1" v-model="newEmpresa.area[0]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[0][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[0][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-1.png" /><br /><br />
 
                                         
 
         <label for="area_q2">Canto superior esquerdo (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q2" v-model="newEmpresa.area[1]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[1][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[1][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-2.png" /><br /><br />
 
 
 
         <label for="area_q3">Canto inferior esquerdo (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q3" v-model="newEmpresa.area[2]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[2][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[2][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-3.png" /><br /><br />
 
 
 
         <label for="area_q4">Canto inferior direito (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q4" v-model="newEmpresa.area[3]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[3][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[3][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-4.png" /><br /><br /><br />
 
         <button id="editarEmpresa"
                 class="salvar_btn"
-                @click="editEmpresa();">
+                @click="editEmpresa('Incluíndo');">
                 Salvar
         </button><br /><br />
 
@@ -75,15 +95,13 @@
 
 
 
+
         <h3><u>Definição da localização do terreno - coordenadas</u></h3>
-        <h4>Canto superior direito</h4>
-        {{ empresa.area[0] }}<br />
-        <h4>Canto superior esquerdo</h4>
-        {{ empresa.area[1] }}<br />
-        <h4>Canto inferior esquerdo</h4>
-        {{ empresa.area[2] }}<br />
-        <h4>Canto inferior direito</h4>
-        {{ empresa.area[3] }}<br /><br />
+        <div>
+                <li v-for="(v, index) in areas.find((a) => a.titulo == 'Empresa').coordenadas" :key="index">
+                    {{ " Longitude:" + v[0] + "   |   Latitude: " + v[1] }}<br/>
+                </li>
+            </div>
   </div>
       <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Edição ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <div v-if="empresa && edicaoHabilitada" class="new_empresa_form">
@@ -103,30 +121,50 @@
 
         <h3><u>Definição da localização do terreno - coordenadas</u></h3>
         <label for="area_q1">Canto superior direito (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q1" v-model="newEmpresa.area[0]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[0][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[0][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-1.png" /><br /><br />
 
                                         
 
         <label for="area_q2">Canto superior esquerdo (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q2" v-model="newEmpresa.area[1]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[1][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[1][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-2.png" /><br /><br />
 
 
 
         <label for="area_q3">Canto inferior esquerdo (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q3" v-model="newEmpresa.area[2]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[2][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[2][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-3.png" /><br /><br />
 
 
 
         <label for="area_q4">Canto inferior direito (ex.: 12,345678)</label><br />
-        <input type="number" id="area_q4" v-model="newEmpresa.area[3]" /><br /><br />
+        &nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px; border: none;"/>Longitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[3][0]" />
+        <br/>
+        <img src="../assets/latitude_icon.png" style="width: 30px; border: none;"/>Latitude:&nbsp;&nbsp;
+        <input type="number" id="longitude" v-model="newArea.coordenadas[3][1]" />
+        <br /><br />
         <img src="../assets/input_localizacao_empresa-quadrante-4.png" /><br /><br /><br />
 
         <button id="editarEmpresa"
                 class="salvar_btn"
-                @click="editEmpresa();">
+                @click="editEmpresa('Editando');">
                 Salvar
         </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button id="cancelarEdicaoEmpresa"
@@ -151,21 +189,48 @@ export default {
               razaoSocial: '',
               nomeFantasia: '',
               endereco: '',
-              logotipo: '',
-              area: []
+              //logotipo: '',
+              //area: []
+              area: 1
             },
-            edicaoHabilitada: false
+              edicaoHabilitada: false,
+              newArea: {
+                  id: 1,
+                  titulo: 'Empresa',
+                  descricao: 'registro contendo os vértices referentes a área na qual está situada a empresa como um todo.',
+                  coordenadas: [[null,null],
+                                [null,null],
+                                [null,null],
+                                [null,null]]
+              }
     } 
   },
    computed: {
      empresa: function () {
       return this.$store.state.empresa;
+    },
+    areas: function () {
+      return this.$store.state.areas;
     }
    },
 
   methods: {
-      editEmpresa() {
-        this.$store.dispatch('editEmpresa', this.newEmpresa);
+      editEmpresa(incluindoOuEditando) {
+        if (incluindoOuEditando == "Incluíndo") {
+          this.$store.dispatch('editEmpresa', this.newEmpresa);
+          this.$store.dispatch('addArea', this.newArea);
+
+        } else if (incluindoOuEditando == "Editando") {
+          var referenciaAreaDaEmpresa = this.areas.find(a => a.titulo == 'Empresa');
+
+          var objForEditing = {
+            areaForEditing: this.newArea,
+            idOfNewArea: this.areas.indexOf(referenciaAreaDaEmpresa),
+          };
+
+          this.$store.dispatch("editArea", objForEditing);
+        }
+        
         this.edicaoHabilitada = false;
   },
   prepararParaEdicao() {
@@ -176,8 +241,9 @@ export default {
 
   beforeCreate () {
       this.$store.dispatch('loadEmpresa');
+      this.$store.dispatch('loadAreas'); 
   }
-  
+
 }
 </script>
 

@@ -79,7 +79,15 @@ export default {
     passwordOnChange(input) {
       this.isPasswordEmpty = !input.nodeValue == '';
     }
-  }
+  },
+  beforeCreate() {
+    this.$store.dispatch("loadEmpresa");
+    this.$store.dispatch("loadDepartamentos");
+    this.$store.dispatch("loadCargos");
+    this.$store.dispatch("loadColaboradores");
+    this.$store.dispatch("loadUsuarios");
+    this.$store.dispatch("loadAreas");
+  },
 };
 </script>
 

@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    empresa: {},
+    //empresa: {},
+    empresa: null,
     departamentos: [],
     cargos: [],
     colaboradores: [],
@@ -13,7 +14,7 @@ export default createStore({
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Empresa mutations
     editEmpresa(state, empresa) {
-      localStorage.setItem('infoEmpresa', JSON.stringify(empresa))
+      localStorage.setItem('empresa', JSON.stringify(empresa));
       state.empresa = empresa;
       alert('Informações da empresa salvas com sucesso.');
     },
@@ -146,11 +147,12 @@ deleteArea(state, id) {
 // Empresa actions
     editEmpresa({ commit }, empresa) {
       commit('editEmpresa', empresa);
+      commit('addArea', empresa.area);
     },
 
     loadEmpresa({ commit }) {
-      if (localStorage.getItem('infoEmpresa')) {
-        commit('loadEmpresa', JSON.parse(localStorage.getItem('infoEmpresa')) );
+      if (localStorage.getItem('empresa')) {
+        commit('loadEmpresa', JSON.parse(localStorage.getItem('empresa')) );
       } else {
         commit('loadEmpresa', null);
       }      

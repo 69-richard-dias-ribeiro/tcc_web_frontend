@@ -12,11 +12,11 @@
 
 
       <br />
-      <router-link to="/empresa">
+      <!-- <router-link to="/empresa">
           <button id="company_btn" class="blue_btn">
              Empresa
           </button>
-      </router-link><br/><br/>
+      </router-link><br/><br/> -->
 
       <router-link to="/funcionarios" style="margin-left: 15px;">
           <button id="employees_btn" class="blue_btn">
@@ -62,7 +62,7 @@ export default {
   methods: {
  
   },
-
+  
   mounted() {
 
     function returnCurrentTimeStamp() {

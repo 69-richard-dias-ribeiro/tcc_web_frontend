@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Login from '../views/Login.vue';
 import Home from '../views/Home.vue';
-import Empresa from '../views/Empresa.vue';
+//import Empresa from '../views/Empresa.vue';
 import FuncionariosOptions from '../views/FuncionariosOptions.vue';
 import Usuarios from '../views/Usuarios.vue';
 import Colaboradores from '../views/Colaboradores.vue';
@@ -20,11 +20,11 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/empresa',
-    name: 'Empresa',
-    component: Empresa
-  },
+  // {
+  //   path: '/empresa',
+  //   name: 'Empresa',
+  //   component: Empresa
+  // },
   {
     path: '/funcionarios',
     name: 'Funcionarios',

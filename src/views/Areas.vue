@@ -9,6 +9,14 @@
   <h3 v-if="!areas || areas.length <= 0" style="color: grey">
     Nenhuma área encontrada.
   </h3>
+  <div>
+  <p v-if="areas && !areas.find((a) => a.titulo == 'Empresa')" style="border-radius: 10px; border: 2px solid red; display: inline-block;
+                                                                      padding: 10px; font-weight: bolder; background-color: yellow">
+    Obs.: para que o sistema funcione como esperado, é necessário que haja<br />
+          uma área cujo título seja "Empresa". Nela, insira as coordenadas<br />
+          da sua coorporação como um todo
+  </p>
+  </div>
   <button class="add_btn" @click="listagemInclusaoEdicaoMode = 2;">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adicionar</button
   ><br /><br />
@@ -37,21 +45,22 @@
         <th></th>
       </tr>
       <tr v-for="(a, index) in areas" :key="index">
-        <td style="padding-right: 15px; border: 0.25px solid grey;">
-          {{ a.id }}
+        <td style="padding-right: 15px; border: 0.25px solid grey;" :class="{area_principal: a.titulo == 'Empresa'}">
+          <div>{{ a.id }}</div>
         </td>
-        <td style="padding-right: 15px; border: 0.25px solid grey;">
-          {{ a.titulo }}
+        <td style="padding-right: 15px; border: 0.25px solid grey;" :class="{area_principal: a.titulo == 'Empresa'}">
+          <div>{{ a.titulo }}</div>
         </td>
-        <td style="padding-right: 15px; border: 0.25px solid grey;">
-          {{ a.descricao }}
+        <td style="padding-right: 15px; border: 0.25px solid grey;" :class="{area_principal: a.titulo == 'Empresa'}">
+          <div>{{ a.descricao }}</div>
         </td>
-        <td v-if="a.coordenadas && a.coordenadas.length > 0" style="padding-right: 15px; border: 0.25px solid grey;">
-            <ul>
+        <td v-if="a.coordenadas && a.coordenadas.length > 0" style="padding-right: 15px; border: 0.25px solid grey;"
+          :class="{area_principal: a.titulo == 'Empresa'}">
+            <ol style="text-align: left;">
                 <li v-for="(v, index) in a.coordenadas" :key="index">
-                    {{ ( index + 1 ) + " º vértice: Longitude:" + v[0] + "   |    Latitude: " + v[1] }}<br/>
+                    {{ " Longitude:" + v[0] + "   |   Latitude: " + v[1] }}<br/>
                 </li>
-            </ul>
+            </ol>
         </td>
         
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -214,7 +223,21 @@ export default {
   },
   methods: {
     addNewCoordenadaToNewArea() {
-        this.newArea.coordenadas.push([this.newLongitude, this.newLatitude]);
+        var coordenadaAtual = [this.newLongitude, this.newLatitude];
+        var repeticaoEncontrada = false;
+
+        this.newArea.coordenadas.forEach(function(c){
+            if (c[0] == coordenadaAtual[0] && c[1] == coordenadaAtual[1]) repeticaoEncontrada = true;
+        });
+
+
+        if (!this.newLongitude || !this.newLatitude) {
+            alert('Insira algum valor para longitude e latitude');
+        } else if (repeticaoEncontrada) {
+            alert('Erro: coordenada repetida')
+        } else {
+            this.newArea.coordenadas.push([this.newLongitude, this.newLatitude]);
+        }
     },
     resetarFormularios() {
       this.listagemInclusaoEdicaoMode = 1;
@@ -266,6 +289,11 @@ export default {
 </script>
 
 <style scoped>
+
+.area_principal {
+  background-color: yellow;
+  font-weight: bold;
+} 
 
 .inflating_btn:hover {
   box-shadow: 0 0 20px black;
@@ -446,4 +474,5 @@ input {
 .salvar_btn:hover, .cancelar_btn:hover {
   background-color: #1664ca;
 }
+
 </style>
