@@ -10,7 +10,7 @@
     Nenhuma área encontrada.
   </h3>
   <div>
-  <p v-if="areas && !areas.find((a) => a.titulo == 'Empresa')" style="border-radius: 10px; border: 2px solid red; display: inline-block;
+  <p v-if="areas && !areas.find((a) => a.titulo.toUpperCase() == 'EMPRESA') && listagemInclusaoEdicaoMode == 1" style="border-radius: 10px; border: 2px solid red; display: inline-block;
                                                                       padding: 10px; font-weight: bolder; background-color: yellow">
     Obs.: para que o sistema funcione como esperado, é necessário que haja<br />
           uma área cujo título seja "Empresa". Nela, insira as coordenadas<br />
@@ -100,6 +100,17 @@
       <br /><br />
 
       <h3><u>Coordenadas dos vértices da área</u></h3>
+
+
+
+      <div v-if="areas && !areas.find((a) => a.titulo.toUpperCase() == 'EMPRESA') && newArea.titulo.toUpperCase() == 'EMPRESA'">
+      <b>&#9679;&nbsp;Insira as coordenadas de sua organização na seguinte ordem:</b><br />
+      <br />
+      <img src="../assets/input_localizacao_empresa-quadrantes_gif.gif" />
+      <br />
+      </div>
+
+
 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px;"/>Longitude:&nbsp;&nbsp;
       <input type="number" id="longitude" v-model="newLongitude" />

@@ -18,6 +18,12 @@
           </button>
       </router-link><br/><br/> -->
 
+      <router-link to="/areas" style="margin-left: 0px;">
+          <button id="areas_btn" class="blue_btn">
+              Áreas
+          </button>
+      </router-link><br/><br/>
+
       <router-link to="/funcionarios" style="margin-left: 15px;">
           <button id="employees_btn" class="blue_btn">
               Funcionários
@@ -30,11 +36,11 @@
           </button>
       </router-link><br/><br/>
 
-      <router-link to="/areas" style="margin-left: 45px;">
+      <!-- <router-link to="/areas" style="margin-left: 45px;">
           <button id="areas_btn" class="blue_btn">
               Áreas
           </button>
-      </router-link><br/><br/>
+      </router-link><br/><br/> -->
 
       <router-link to="/" style="margin-left: 60px;">
           <button id="data_btn" class="blue_btn">
