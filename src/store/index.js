@@ -8,7 +8,8 @@ export default createStore({
     cargos: [],
     colaboradores: [],
     usuarios: [],
-    areas: []
+    areas: [],
+    restricoes: []
   },
   mutations: {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -256,7 +257,7 @@ deleteUsuario({ commit }, id) {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Área/áreas actions
 addArea({ commit }, newArea) {
-  if (localStorage.getItem('areas') &&
+  if (localStorage.getItem('areas') && 
        JSON.parse(localStorage.getItem('areas')).find(element => element.titulo == newArea.titulo.trim())) {
         alert('Erro: o título inserido já existe.');
   } else {

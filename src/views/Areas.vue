@@ -104,7 +104,7 @@
 
 
       <div v-if="areas && !areas.find((a) => a.titulo.toUpperCase() == 'EMPRESA') && newArea.titulo.toUpperCase() == 'EMPRESA'">
-      <b>&#9679;&nbsp;Insira as coordenadas de sua organização na seguinte ordem:</b><br />
+      <span style="bolder">&#9679;&nbsp;Insira as coordenadas de sua organização na seguinte</span>&nbsp;<b>ordem:</b><br />
       <br />
       <img src="../assets/input_localizacao_empresa-quadrantes_gif.gif" />
       <br />
