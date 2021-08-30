@@ -9,6 +9,7 @@ import Departamentos from '../views/Departamentos.vue';
 import Cargos from '../views/Cargos.vue';
 import Areas from '../views/Areas.vue';
 import Restricoes from '../views/Restricoes.vue';
+import Registros from '../views/Registros.vue';
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: '/restricoes',
     name: 'Restricoes',
     component: Restricoes
+  },
+  {
+    path: '/registros',
+    name: 'Registros',
+    component: Registros
   }
   // {
   //   path: '/about',

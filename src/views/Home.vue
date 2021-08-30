@@ -48,7 +48,7 @@
           </button>
       </router-link><br/><br/>
 
-      <router-link to="/" style="margin-left: 75px;">
+      <router-link to="/registros" style="margin-left: 75px;">
           <button id="logs_btn" class="blue_btn">
               Registros
           </button>
@@ -65,8 +65,23 @@
 
 <script>
 export default {
+  data () {
+    return {
+      newRegistro:
+            {
+                id: -1,
+                data: null,
+                colaborador: null,
+                area: null,
+                restricao: null
+            }
+    }
+  },
+
   methods: {
- 
+    addRegistro() {
+      this.$store.dispatch('addRegistro', this.newRegistro);
+    },
   },
   
   mounted() {
@@ -114,6 +129,28 @@ export default {
       ctx.fillText(returnCurrentTimeStamp(), 5, 15);
     
     }, 60000);
+  },
+
+  computed: {
+    registros: function () {
+      return this.$store.state.registros;
+    },
+    colaboradores: function () {
+      return this.$store.state.colaboradores;
+    },
+    areas: function () {
+        return this.$store.state.areas;
+    },
+    restricoes: function () {
+        return this.$store.state.restricoes;
+    }
+  },
+
+  beforeCreate() {
+    this.$store.dispatch("loadRegistros");
+    this.$store.dispatch("loadColaboradores");
+    this.$store.dispatch("loadAreas");
+    this.$store.dispatch("loadRestricoes");
   },
 };
 </script>

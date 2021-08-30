@@ -119,7 +119,7 @@ deleteUsuario(state, id) {
   localStorage.setItem('usuarios', JSON.stringify(state.usuarios));
 },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Usuário/Usuários mutations
+// Área/Áreas mutations
 addArea(state, newArea) {
   if (state.areas) {
     state.areas.push(newArea);
@@ -165,6 +165,26 @@ editRestricao(state, objForEditing) {
 deleteRestricao(state, id) {
   state.restricoes.splice(id, 1);
   localStorage.setItem('restricoes', JSON.stringify(state.restricoes));
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Registro/Registros mutations
+addRegistro(state, newRegistro) {
+  if (state.registros) {
+    state.registros.push(newRegistro);
+    localStorage.setItem('registros', JSON.stringify(state.registros));
+  } else {
+    var registros = [];
+    registros.push(newRegistro);
+    state.registros = registros;
+    localStorage.setItem('registros', JSON.stringify(state.registros));
+  }
+},  
+loadRegistros(state, registros) {
+  state.registros = registros;
+},
+deleteRegistro(state, id) {
+  state.registros.splice(id, 1);
+  localStorage.setItem('registros', JSON.stringify(state.registros));
 }
 },
   actions: {
@@ -323,6 +343,21 @@ editRestricao({ commit }, objForEditing) {
 },
 deleteRestricao({ commit }, id) {
   commit('deleteRestricao', id);
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Registro/Registros actions
+addRegistro({ commit }, newRegistro) {
+    commit('addRegistro', newRegistro);
+},
+loadRegistros({ commit }) {
+  if (localStorage.getItem('registros')) {
+    commit('loadRegistros', JSON.parse(localStorage.getItem('registros')) );
+  } else {
+    commit('loadRegistros', null);
+  } 
+},
+deleteRegistro({ commit }, id) {
+  commit('deleteRegistro', id);
 }
 },
   modules: {
