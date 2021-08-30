@@ -6,12 +6,12 @@
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usuários</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!usuarios || usuarios.length <= 0" style="color: grey">
+  <h3 v-if="(!usuarios || usuarios.length <= 0) && (listagemInclusaoEdicaoMode == 1)" style="color: grey">
     Nenhum usuário encontrado.
-  </h3>
+  </h3><span v-if="listagemInclusaoEdicaoMode == 1">
   <button class="add_btn" @click="listagemInclusaoEdicaoMode = 2;">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adicionar</button
-  ><br /><br />
+  ></span><br /><br />
   <div style="display: inline-block">
 
 
@@ -31,8 +31,8 @@
       <tr>
         <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">ID</th>
         <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Usuário</th>
-        <th style="border-bottom: 2px solid grey;">Senha</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">É Adm</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Senha</th>
+        <th style="border-bottom: 2px solid grey;">É Adm</th>
         <th></th>
         <th></th>
       </tr>
@@ -79,6 +79,7 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Inclusão ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div v-if="listagemInclusaoEdicaoMode == 2"><br /><br />
+
       <label for="usuario">Usuário (matrícula do colaborador):</label><br />
       <select id="usuario" v-model="newUsuario.usuario">
           <option v-for="(c, index) in colaboradores" :key="index" :value="c.id">{{c.matricula}}</option>
@@ -86,11 +87,13 @@
       <label for="senha">Senha:</label><br />
       <input type="text" id="senha" v-model="newUsuario.senha" />
       <br /><br /><label>É Adm:</label><br />
-      <label for="eadm_sim" style="font-weight: normal;">Sim:</label>
+      
       <input type="radio"  class="radioRadioso" name="eadm" id="eadm_sim" value="1" v-model="newUsuario.eadm"/>
+      <label for="eadm_sim" style="font-weight: normal; cursor: pointer">Sim</label>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="eadm_nao" style="font-weight: normal;">Não:</label>
+      
       <input type="radio"  class="radioRadioso" name="eadm" id="eadm_nao" value="0" v-model="newUsuario.eadm"/>
+      <label for="eadm_nao" style="font-weight: normal;  cursor: pointer">Não</label>
       <br /><br /><br /><br />
 
       <button id="addUsuario"
@@ -112,20 +115,22 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Edição ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div v-if="listagemInclusaoEdicaoMode == 3"><br /><br />
-      <label for="usuario_edit">Usuário (matrícula do colaborador):</label><br />
-      <select id="usuario_edit" v-model="newUsuario.usuario">
+      
+      <label for="usuario">Usuário (matrícula do colaborador):</label><br />
+      <select id="usuario" v-model="newUsuario.usuario">
           <option v-for="(c, index) in colaboradores" :key="index" :value="c.id">{{c.matricula}}</option>
       </select><br /><br />
-      <label for="senha_edit">Senha:</label><br />
-      <input type="text" id="senha_edit" v-model="newUsuario.senha" />
+      <label for="senha">Senha:</label><br />
+      <input type="text" id="senha" v-model="newUsuario.senha" />
       <br /><br /><label>É Adm:</label><br />
-      <label for="eadm_sim" style="font-weight: normal;">Sim:</label>
+      
       <input type="radio"  class="radioRadioso" name="eadm" id="eadm_sim" value="1" v-model="newUsuario.eadm"/>
+      <label for="eadm_sim" style="font-weight: normal; cursor: pointer">Sim</label>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="eadm_nao" style="font-weight: normal;">Não:</label>
+      
       <input type="radio"  class="radioRadioso" name="eadm" id="eadm_nao" value="0" v-model="newUsuario.eadm"/>
+      <label for="eadm_nao" style="font-weight: normal; cursor: pointer">Não</label>
       <br /><br /><br /><br />
-
       
       <button id="editUsuario"
                 class="salvar_btn"
@@ -380,10 +385,21 @@ input {
   background-color: #1664ca;
 }
 
-.radioRadioso {
+/* .radioRadioso {
   transform: scale(1.5);
   font-size: large;
   background:transparent;
+  cursor: pointer;
+} */
+
+input[type="radio"] {
+   box-shadow: none !important;
+   cursor: pointer;
+   width: 1.5em;
+   height: 1.5em;
+} 
+
+select option {
   cursor: pointer;
 }
 </style>

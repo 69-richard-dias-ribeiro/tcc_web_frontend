@@ -1,17 +1,17 @@
 <template>
-  <router-link to="/funcionarios">
+  <router-link to="/pagina_inicial">
     <button id="leave_btn" class="red_btn" style="left: 10px">Voltar</button>
   </router-link>
   <h1 style="position: fixed; left: 150px; top: 50px; color: grey">
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restrições</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!restricoes || restricoes.length <= 0" style="color: grey">
+  <h3 v-if="(!restricoes || restricoes.length <= 0) && (listagemInclusaoEdicaoMode == 1)" style="color: grey">
     Nenhuma restricão encontrada.
-  </h3>
+  </h3><span v-if="listagemInclusaoEdicaoMode == 1">
   <button class="add_btn" @click="listagemInclusaoEdicaoMode = 2;">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adicionar</button
-  ><br /><br />
+  ></span><br /><br />
   <div style="display: inline-block">
 
 
@@ -36,8 +36,8 @@
         <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Aviso</th>
         <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Nível de Risco</th>
         <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">É global</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Funcionários</th>
-        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Áreas</th>
+        <th style="border-bottom: 2px solid grey; border-right: 2px solid grey;">Colaboradores</th>
+        <th style="border-bottom: 2px solid grey;">Áreas</th>
         <th></th>
         <th></th>
       </tr>
@@ -57,32 +57,37 @@
         <td style="padding-right: 15px; border: 0.25px solid grey;">
           {{ r.aviso }}
         </td>
-        <td style="padding-right: 15px; border: 0.25px solid grey;">
-          {{ exibeNivelRisco(r.nivel_risco) }}
+        <td style="padding-right: 15px; border: 0.25px solid grey;"
+            :class="{
+                      nivelBaixoClass : r.nivelRisco == '1',
+                      nivelMedioClass : r.nivelRisco == '2',
+                      nivelAltoClass  : r.nivelRisco == '3'
+                    }">
+          {{ exibeNivelRisco(r.nivelRisco) }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
           {{ (r.restricaoGlobal == 1) ? "Sim" : "Não" }}
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          
-            <!-- asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            asdddddddddddddddddddddddddddddddddddddddddd
-            afgfaskdhqa9wh0rf-93fh293f-923hf923hf92h83f -->
-              
+          <ol>
+              <li v-for="(c, index) in r.colaboradores" :key="index">
+                  {{ c.nome }}
+              </li>
+          </ol> 
         </td>
         <td style="padding-right: 15px; border: 0.25px solid grey;">
-          
-            <!-- asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            asdddddddddddddddddddddddddddddddddddddddddd
-            afgfaskdhqa9wh0rf-93fh293f-923hf923hf92h83f -->
-              
+         <ol>
+              <li v-for="(a, index) in r.areas" :key="index">
+                  {{ a.titulo }}
+              </li>
+          </ol>
         </td>
         
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <td>
           <button
             class="edit_btn"
-            @click="prepararFormEdicao(c);"
+            @click="prepararFormEdicao(r);"
           >
             Editar
           </button>
@@ -91,7 +96,7 @@
         <td>
           <button
             class="delete_btn"
-            @click="deleteColaborador(c.nome, colaboradores.indexOf(c));"
+            @click="deleteRestricao(r.titulo, restricoes.indexOf(r));"
           >
             Excluir
           </button>
@@ -106,42 +111,69 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Inclusão ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div v-if="listagemInclusaoEdicaoMode == 2"><br /><br />
-      <label for="matricula">Matrícula:</label><br />
-      <input type="text" id="matricula" v-model="newColaborador.matricula" />
+
+      <label for="titulo">Título:</label><br />
+      <input type="text" id="titulo" v-model="newRestricao.titulo" />
       <br /><br />
-      <label for="nome">Nome:</label><br />
-      <input type="text" id="nome" v-model="newColaborador.nome" />
+      <label for="descricao">Descrição:</label><br />
+      <textarea style="width: 100%; height: 50px;" type="text" id="descricao" v-model="newRestricao.descricao" />
+
+      <br /><br /><label>Tipo:</label><br />
+      
+      <input type="radio"  class="radioRadioso" name="tipo" id="tipo1" value="1" v-model="newRestricao.tipo"/>
+      <label for="tipo1" style="font-weight: normal; cursor: pointer">Acesso restrito</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <input type="radio"  class="radioRadioso" name="tipo" id="tipo2" value="2" v-model="newRestricao.tipo"/>
+      <label for="tipo2" style="font-weight: normal; cursor: pointer">Distanciamento social</label>
+      <br />
       <br /><br />
-      <label for="email">E-mail:</label><br />
-      <input type="text" id="email" v-model="newColaborador.email" />
-      <br /><br />
-      <label for="telefone">Telefone:</label><br />
-      <input type="text" id="telefone" v-model="newColaborador.telefone" />
-      <br /><br />
-      <label for="data_nasc">Data de nascimento:</label><br />
-      <input type="date" id="data_nasc" v-model="newColaborador.dataNasc" />
-      <br /><br />
-      <label for="data_admissao">Data de admissão:</label><br />
-      <input type="date" id="data_admissao" v-model="newColaborador.dataAdmissao" />
-      <br /><br />
-      <label for="departamento">Departamento:</label><br />
-      <select id="departamento" v-model="newColaborador.departamento">
-          <option v-for="(d, index) in departamentos" :key="index" :value="d.id">{{d.nome}}</option>
+      <label for="aviso">Aviso:</label><br />
+      <textarea style="width: 100%; height: 50px;" type="text" id="aviso" v-model="newRestricao.aviso" />
+      <br />
+
+      <br /><br /><label>Nível de Risco:</label><br />
+      
+      <input type="radio"  class="radioRadioso" name="nivel_risco" id="nr1" value="1" v-model="newRestricao.nivelRisco"/>
+      <label for="nr1" style="font-weight: normal; cursor: pointer">1 (Baixo)</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <input type="radio"  class="radioRadioso" name="nivel_risco" id="nr2" value="2" v-model="newRestricao.nivelRisco"/>
+      <label for="nr2" style="font-weight: normal; cursor: pointer">2 (Médio)</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <input type="radio"  class="radioRadioso" name="nivel_risco" id="nr3" value="3" v-model="newRestricao.nivelRisco"/>
+      <label for="nr3" style="font-weight: normal; cursor: pointer">3 (Alto)</label>
+      <br /><br /><br />
+
+      <label>A restrição em questão é global? (aplicavel à todos os colaboradores):</label><br />
+      
+      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal1" value="1" v-model="newRestricao.eGlobal"/>
+      <label for="eglobal1" style="font-weight: normal; cursor: pointer">Sim</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal2" value="0" v-model="newRestricao.eGlobal"/>
+      <label for="eglobal2" style="font-weight: normal; cursor: pointer">Não</label>
+      <br /><br /><br />
+
+      <label v-if="newRestricao.nivelRisco != 0 || newRestricao.nivelRisco != '0'" for="colaboradores">Aplicável aos colaboradores (selecione um ou mais):</label><br />
+      <select multiple name="colaboradores" id="colaboradores" v-model="newRestricao.colaboradores">
+          <option v-for="(c, index) in colaboradores" :key="index" :value="c">{{c.matricula + " - " + c.nome}}</option>
       </select>
       <br /><br />
-      <label for="cargo">Cargo:</label><br />
-      <select id="cargo" v-model="newColaborador.cargo">
-          <option v-for="(c, index) in cargos" :key="index" :value="c.id">{{c.nome}}</option>
+
+      <label for="areas">Aplicável às áreas (selecione um ou mais):</label><br />
+      <select multiple name="areas" id="areas" v-model="newRestricao.areas">
+          <option v-for="(a, index) in areas" :key="index" :value="a">{{a.titulo}}</option>
       </select>
       <br /><br /><br /><br />
-
       
-      <button id="addColaborador"
+      <button id="addRestricao"
                 class="salvar_btn"
-                @click="addColaborador();">
+                @click="addRestricao();">
                 Salvar
         </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button id="cancelarEdicaoUsuario"
+        <button id="cancelarEdicaoRestricao"
                     class="cancelar_btn"
                     @click="resetarFormularios();">
                     Cancelar
@@ -155,42 +187,62 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Edição ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div v-if="listagemInclusaoEdicaoMode == 3"><br /><br />
-      <label for="matricula_edit">Matrícula:</label><br />
-      <input type="text" id="matricula_edit" v-model="newColaborador.matricula" />
+
+      <label for="titulo">Título:</label><br />
+      <input type="text" id="titulo" v-model="newRestricao.titulo" />
       <br /><br />
-      <label for="nome_edit">Nome:</label><br />
-      <input type="text" id="nome_edit" v-model="newColaborador.nome" />
+      <label for="descricao">Descrição:</label><br />
+      <textarea style="width: 100%; height: 50px;" type="text" id="descricao" v-model="newRestricao.descricao" />
+
+      <br /><br /><label>Tipo:</label><br />
+      <label for="tipo1" style="font-weight: normal; cursor: pointer">Acesso restrito</label>
+      <input type="radio"  class="radioRadioso" name="tipo" id="tipo1" value="1" v-model="newRestricao.tipo"/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label for="tipo2" style="font-weight: normal; cursor: pointer">Distanciamento social</label>
+      <input type="radio"  class="radioRadioso" name="tipo" id="tipo2" value="2" v-model="newRestricao.tipo"/>
+      <br />
       <br /><br />
-      <label for="email_edit">E-mail:</label><br />
-      <input type="text" id="email_edit" v-model="newColaborador.email" />
-      <br /><br />
-      <label for="telefone_edit">Telefone:</label><br />
-      <input type="text" id="telefone_edit" v-model="newColaborador.telefone" />
-      <br /><br />
-      <label for="data_nasc_edit">Data de nascimento:</label><br />
-      <input type="date" id="data_nasc_edit" v-model="newColaborador.dataNasc" />
-      <br /><br />
-      <label for="data_admissao_edit">Data de admissão:</label><br />
-      <input type="date" id="data_admissao_edit" v-model="newColaborador.dataAdmissao" />
-      <br /><br />
-      <label for="departamento_edit">Departamento:</label><br />
-      <select id="departamento_edit" v-model="newColaborador.departamento">
-          <option v-for="(d, index) in departamentos" :key="index" :value="d.id">{{d.nome}}</option>
+      <label for="aviso">Aviso:</label><br />
+      <textarea style="width: 100%; height: 50px;" type="text" id="aviso" v-model="newRestricao.aviso" />
+      <br />
+
+      <br /><br /><label>Nível de Risco:</label><br />
+      <label for="nr1" style="font-weight: normal; cursor: pointer">1 (Baixo)</label>
+      <input type="radio"  class="radioRadioso" name="nivel_risco" id="nr1" value="1" v-model="newRestricao.nivelRisco"/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label for="nr2" style="font-weight: normal; cursor: pointer">2 (Médio)</label>
+      <input type="radio"  class="radioRadioso" name="nivel_risco" id="nr2" value="2" v-model="newRestricao.nivelRisco"/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label for="nr3" style="font-weight: normal; cursor: pointer">3 (Alto)</label>
+      <input type="radio"  class="radioRadioso" name="nivel_risco" id="nr3" value="3" v-model="newRestricao.nivelRisco"/>
+      <br /><br /><br />
+
+      <label>A restrição em questão é global? (aplicavel à todos os colaboradores):</label><br />
+      <label for="eglobal1" style="font-weight: normal; cursor: pointer">Sim</label>
+      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal1" value="1" v-model="newRestricao.restricaoGlobal"/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label for="eglobal2" style="font-weight: normal; cursor: pointer">Não</label>
+      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal2" value="0" v-model="newRestricao.restricaoGlobal"/>
+      <br /><br /><br />
+
+      <label v-if="newRestricao.nivelRisco != 0 || newRestricao.nivelRisco != '0'" for="colaboradores">Aplicável aos colaboradores:</label><br />
+      <select multiple name="colaboradores" id="colaboradores" v-model="newRestricao.colaboradores">
+          <option v-for="(c, index) in colaboradores" :key="index" :value="c">{{c.matricula - c.nome}}</option>
       </select>
       <br /><br />
-      <label for="cargo_edit">Cargo:</label><br />
-      <select id="cargo_edit" v-model="newColaborador.cargo">
-          <option v-for="(c, index) in cargos" :key="index" :value="c.id">{{c.nome}}</option>
+
+      <label for="areas">Aplicável às áreas:</label><br />
+      <select multiple name="areas" id="areas" v-model="newRestricao.areas">
+          <option v-for="(a, index) in areas" :key="index" :value="a">{{a.titulo}}</option>
       </select>
       <br /><br /><br /><br />
 
-      
-      <button id="editColaborador"
+      <button id="editRestricao"
                 class="salvar_btn"
-                @click="editColaborador();">
+                @click="editRestricao();">
                 Salvar
         </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button id="cancelarEdicaoColaborador"
+        <button id="cancelarEdicaoRestricao"
                     class="cancelar_btn"
                     @click="resetarFormularios();">
                     Cancelar
@@ -211,99 +263,94 @@ export default {
                3: edição
             */
             listagemInclusaoEdicaoMode: 1,
-            newColaborador:
+            newRestricao:
             {
                 id: -1,
-                matricula: '',
-                nome: '',
-                email: '',
-                telefone: '',
-                dataNasc: null,
-                dataAdmissao: null,
-                departamento: null,
-                cargo: null
+                titulo: '',
+                descricao: '',
+                tipo: null,
+                aviso: '',
+                nivelRisco: null,
+                restricaoGlobal: null,
+                colaboradores: [],
+                areas: []
             }
         }
     },
     computed: {
-    cargos: function () {
-      return this.$store.state.cargos;
-    },
-    departamentos: function () {
-        return this.$store.state.departamentos;
+    restricoes: function () {
+      return this.$store.state.restricoes;
     },
     colaboradores: function () {
-      return this.$store.state.colaboradores;
+        return this.$store.state.colaboradores;
+    },
+    areas: function () {
+        return this.$store.state.areas;
     }
   },
   beforeCreate() {
+    this.$store.dispatch("loadRestricoes");
     this.$store.dispatch("loadColaboradores");
-    this.$store.dispatch("loadDepartamentos");
-    this.$store.dispatch("loadCargos");
+    this.$store.dispatch("loadAreas");
   },
   methods: {
     exibeNivelRisco(nivel_risco) {
-        if (nivel_risco == 1) {
-            return "Risco Baixo";
-        } else if (nivel_risco == 2) {
-            return "Médio risco";
-        } else if (nivel_risco == 3){
-            return "Risco alto";
+        if (nivel_risco == "1") {
+            return "1 (Baixo)";
+        } else if (nivel_risco == "2") {
+            return "2 (Médio)";
+        } else if (nivel_risco == "3"){
+            return "3 (Alto)";
         } else {
             return " - "
         }
     },
-
-    formatarDataPtBR(data) {
-      var data_arr = data.split('-');
-      return data_arr[2] + "/" + data_arr[1] + "/" + data_arr[0];
-    },
     resetarFormularios() {
       this.listagemInclusaoEdicaoMode = 1;
-      this.newColaborador = 
-      {
+      this.newRestricao = 
+            {
                 id: -1,
-                matricula: '',
-                nome: '',
-                email: '',
-                telefone: '',
-                dataNasc: null,
-                dataAdmissao: null,
-                departamento: null,
-                cargo: null
-      }
+                titulo: '',
+                descricao: '',
+                tipo: null,
+                aviso: '',
+                nivelRisco: null,
+                restricaoGlobal: null,
+                colaboradores: [],
+                areas: []
+            }
     },
-    prepararFormEdicao(colaborador) {
+    prepararFormEdicao(restricao) {
       this.listagemInclusaoEdicaoMode = 3;
-      this.indexOfColaboradorASerEditado = this.colaboradores.indexOf(colaborador);
-      this.newColaborador = {
-                id: colaborador.id,
-                matricula: colaborador.matricula,
-                nome: colaborador.nome,
-                email: colaborador.email,
-                telefone: colaborador.telefone,
-                dataNasc: colaborador.dataNasc,
-                dataAdmissao: colaborador.dataAdmissao,
-                departamento: colaborador.departamento,
-                cargo: colaborador.cargo
+      this.indexOfRestricaoASerEditada = this.restricoes.indexOf(restricao);
+      this.newRestricao = {
+                id: restricao.id,
+                titulo: restricao.titulo,
+                descricao: restricao.descricao,
+                tipo: restricao.tipo,
+                aviso: restricao.aviso,
+                nivelRisco: restricao.nivelRisco,
+                restricaoGlobal: restricao.restricaoGlobal,
+                colaboradores: restricao.colaboradores,
+                areas: restricao.areas
       }
     },
-    addColaborador() {
-      this.$store.dispatch('addColaborador', this.newColaborador);
+    addRestricao() {
+      this.$store.dispatch('addRestricao', this.newRestricao);
       this.resetarFormularios();
     },
-    editColaborador() {
+    editRestricao() {
       var objForEditing = {
-          colaboradorForEditing: this.newColaborador,
-          idOfNewColaborador: this.indexOfColaboradorASerEditado,
+          restricaoForEditing: this.newRestricao,
+          idOfNewRestricao: this.indexOfRestricaoASerEditada,
         };
 
-        this.$store.dispatch("editColaborador", objForEditing);
+        this.$store.dispatch("editRestricao", objForEditing);
         this.resetarFormularios();
     },
-    deleteColaborador(nome, id) {
-      if (confirm('Confirma a exclusão do(a) colaborador(a) ' + nome + '?')) {
-        this.$store.dispatch("deleteColaborador", id);
+    deleteRestricao(titulo, id) {
+      if (confirm('Confirma a exclusão da restrição "' + titulo + '"?')) {
+        this.$store.dispatch("deleteRestricao", id);
       }
     }
   }
@@ -464,4 +511,20 @@ input {
 .salvar_btn:hover, .cancelar_btn:hover {
   background-color: #1664ca;
 }
+
+.nivelBaixoClass { background-color: #ffcccc; }
+.nivelMedioClass { background-color: #ff6666; color: white;}
+.nivelAltoClass  { background-color: #ff0000; color: white; }
+
+input[type="radio"] {
+   box-shadow: none !important;
+   cursor: pointer;
+   width: 1.5em;
+   height: 1.5em;
+}
+
+select option {
+  cursor: pointer;
+}
+
 </style>

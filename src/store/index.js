@@ -141,7 +141,31 @@ editArea(state, objForEditing) {
 deleteArea(state, id) {
   state.areas.splice(id, 1);
   localStorage.setItem('areas', JSON.stringify(state.areas));
+  },
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Restrição/Restrições mutations
+addRestricao(state, newRestricao) {
+  if (state.restricoes) {
+    state.restricoes.push(newRestricao);
+    localStorage.setItem('restricoes', JSON.stringify(state.restricoes));
+  } else {
+    var restricoes = [];
+    restricoes.push(newRestricao);
+    state.restricoes = restricoes;
+    localStorage.setItem('restricoes', JSON.stringify(state.restricoes));
   }
+  alert('Restrição adicionada com sucesso.');
+},  
+loadRestricoes(state, restricoes) {
+  state.restricoes = restricoes;
+},
+editRestricao(state, objForEditing) {
+  state.restricoes[objForEditing.idOfNewRestricao] = objForEditing.restricaoForEditing;
+},
+deleteRestricao(state, id) {
+  state.restricoes.splice(id, 1);
+  localStorage.setItem('restricoes', JSON.stringify(state.restricoes));
+}
 },
   actions: {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -276,6 +300,29 @@ editArea({ commit }, objForEditing) {
 },
 deleteArea({ commit }, id) {
   commit('deleteArea', id);
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Restrição/Restrições actions
+addRestricao({ commit }, newRestricao) {
+  if (localStorage.getItem('restricoes') && 
+       JSON.parse(localStorage.getItem('restricoes')).find(element => element.titulo == newRestricao.titulo.trim())) {
+        alert('Erro: o título inserido já existe.');
+  } else {
+    commit('addRestricao', newRestricao);
+  }
+},
+loadRestricoes({ commit }) {
+  if (localStorage.getItem('restricoes')) {
+    commit('loadRestricoes', JSON.parse(localStorage.getItem('restricoes')) );
+  } else {
+    commit('loadRestricoes', null);
+  } 
+},
+editRestricao({ commit }, objForEditing) {
+  commit('editRestricao', objForEditing);
+},
+deleteRestricao({ commit }, id) {
+  commit('deleteRestricao', id);
 }
 },
   modules: {

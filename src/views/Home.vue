@@ -30,7 +30,7 @@
           </button>
       </router-link><br/><br/>
 
-      <router-link to="/" style="margin-left: 30px;">
+      <router-link to="/restricoes" style="margin-left: 30px;">
           <button id="restrictions_btn" class="blue_btn">
               Restrições
           </button>
@@ -217,5 +217,16 @@ export default {
 #logs_btn {
   background-image: url("../assets/logs_icon.png");
   width: 220px;
+}
+
+input[type="radio"] {
+   box-shadow: none !important;
+   cursor: pointer;
+   width: 1.5em;
+   height: 1.5em;
+}
+
+select option {
+  cursor: pointer;
 }
 </style>

@@ -352,4 +352,15 @@ img {
 .red_btn:hover {
   background-color: #c22d00;
 }
+
+input[type="radio"] {
+   box-shadow: none !important;
+   cursor: pointer;
+   width: 1.5em;
+   height: 1.5em;
+}
+
+select option {
+  cursor: pointer;
+}
 </style>

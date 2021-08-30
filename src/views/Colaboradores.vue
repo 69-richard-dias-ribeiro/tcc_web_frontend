@@ -6,12 +6,12 @@
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Colaboradores</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!colaboradores || colaboradores.length <= 0" style="color: grey">
+  <h3 v-if="(!colaboradores || colaboradores.length <= 0) && (listagemInclusaoEdicaoMode == 1)" style="color: grey">
     Nenhum colaborador encontrado.
-  </h3>
-  <button class="add_btn" @click="listagemInclusaoEdicaoMode = 2;">
+  </h3><span v-if="listagemInclusaoEdicaoMode == 1">
+  <button class="add_btn" v-if="listagemInclusaoEdicaoMode == 1" @click="listagemInclusaoEdicaoMode = 2;">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adicionar</button
-  ><br /><br />
+  ></span><br /><br />
   <div style="display: inline-block">
 
 
@@ -439,5 +439,16 @@ input {
 
 .salvar_btn:hover, .cancelar_btn:hover {
   background-color: #1664ca;
+}
+
+input[type="radio"] {
+   box-shadow: none !important;
+   cursor: pointer;
+   width: 1.5em;
+   height: 1.5em;
+}
+
+select option {
+  cursor: pointer !important;
 }
 </style>

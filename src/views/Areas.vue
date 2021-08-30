@@ -6,7 +6,7 @@
     <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Áreas</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
-  <h3 v-if="!areas || areas.length <= 0" style="color: grey">
+  <h3 v-if="(!areas || areas.length <= 0) && (listagemInclusaoEdicaoMode == 1)" style="color: grey">
     Nenhuma área encontrada.
   </h3>
   <div>
@@ -16,10 +16,10 @@
           uma área cujo título seja "Empresa". Nela, insira as coordenadas<br />
           da sua coorporação como um todo
   </p>
-  </div>
+  </div><span v-if="listagemInclusaoEdicaoMode == 1">
   <button class="add_btn" @click="listagemInclusaoEdicaoMode = 2;">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adicionar</button
-  ><br /><br />
+  ></span><br /><br />
   <div style="display: inline-block">
 
 
@@ -484,6 +484,17 @@ input {
 
 .salvar_btn:hover, .cancelar_btn:hover {
   background-color: #1664ca;
+}
+
+input[type="radio"] {
+   box-shadow: none !important;
+   cursor: pointer;
+   width: 1.5em;
+   height: 1.5em;
+}
+
+select option {
+  cursor: pointer;
 }
 
 </style>
