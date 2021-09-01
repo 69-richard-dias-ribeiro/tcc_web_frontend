@@ -148,11 +148,11 @@
 
       <label>A restrição em questão é global? (aplicavel à todos os colaboradores):</label><br />
       
-      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal1" value="1" v-model="newRestricao.eGlobal"/>
+      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal1" value="1" v-model="newRestricao.restricaoGlobal"/>
       <label for="eglobal1" style="font-weight: normal; cursor: pointer">Sim</label>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       
-      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal2" value="0" v-model="newRestricao.eGlobal"/>
+      <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal2" value="0" v-model="newRestricao.restricaoGlobal"/>
       <label for="eglobal2" style="font-weight: normal; cursor: pointer">Não</label>
       <br /><br /><br />
 
@@ -363,7 +363,7 @@ label {
 }
 
 input {
-  padding-left: 60px;
+  /* padding-left: 60px; */
   box-shadow: 0 0 2px gray;
 }
 

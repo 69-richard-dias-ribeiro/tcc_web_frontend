@@ -236,7 +236,7 @@ label {
 }
 
 input {
-  padding-left: 60px;
+  /* padding-left: 60px; */
   box-shadow: 0 0 2px gray;
 }
 

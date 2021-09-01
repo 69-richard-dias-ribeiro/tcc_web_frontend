@@ -8,27 +8,34 @@
   <br /><br /><br /><br /><br /><br />
 
   <div class="options">
-    <div style="display: inline-block"> 
-
-    <router-link to="/funcionarios/usuarios">
-    <button id="opt1" class="blue_btn users_btn" style="float: left">
-      Usuários
-    </button></router-link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-    <router-link to="/funcionarios/colaboradores">
-    <button id="opt1" class="blue_btn collaborators_btn" style="float: none">
-      Colaboradores
-    </button></router-link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div style="display: inline-block">
 
     <router-link to="/funcionarios/departamentos">
-    <button id="opt2" class="blue_btn departments_btn" style="float: none">
+    <button id="opt2" class="blue_btn departments_btn" style="float: left;">
       Departamentos
-    </button></router-link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </button></router-link>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
     <router-link to="/funcionarios/cargos">
-    <button id="opt3" class="blue_btn roles_btn" style="float: right">
+    <button id="opt3" class="blue_btn roles_btn" style="float: none;">
       Cargos
     </button></router-link>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+    
+    <router-link to="/funcionarios/colaboradores">
+    <button id="opt1" class="blue_btn collaborators_btn" style="float: none;">
+      Colaboradores
+    </button></router-link>
+    &nbsp;
+
+    <router-link to="/funcionarios/usuarios">
+    <button id="opt1" class="blue_btn users_btn" style="float: right;">
+      Usuários
+    </button></router-link>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
   </div>  
   </div>
 </template>
