@@ -156,11 +156,14 @@
       <label for="eglobal2" style="font-weight: normal; cursor: pointer">Não</label>
       <br /><br /><br />
 
-      <label v-if="newRestricao.nivelRisco != 0 || newRestricao.nivelRisco != '0'" for="colaboradores">Aplicável aos colaboradores (selecione um ou mais):</label><br />
-      <select multiple name="colaboradores" id="colaboradores" v-model="newRestricao.colaboradores">
+      <!-- <label v-if="newRestricao.nivelRisco != 0 || newRestricao.nivelRisco != '0'" for="colaboradores">Aplicável aos colaboradores:</label><br /> -->
+      <div v-if="newRestricao.restricaoGlobal != 1 || newRestricao.restricaoGlobal != '1'">
+      <label for="colaboradores456">Aplicável aos colaboradores:</label><br />
+      <select multiple name="colaboradores456" id="colaboradores456" v-model="newRestricao.colaboradores">
           <option v-for="(c, index) in colaboradores" :key="index" :value="c">{{c.matricula + " - " + c.nome}}</option>
       </select>
-      <br /><br />
+      <br /><br /><br />
+      </div>
 
       <label for="areas">Aplicável às áreas (selecione um ou mais):</label><br />
       <select multiple name="areas" id="areas" v-model="newRestricao.areas">
@@ -225,11 +228,14 @@
       <input type="radio"  class="radioRadioso" name="eglobal" id="eglobal2" value="0" v-model="newRestricao.restricaoGlobal"/>
       <br /><br /><br />
 
-      <label v-if="newRestricao.nivelRisco != 0 || newRestricao.nivelRisco != '0'" for="colaboradores">Aplicável aos colaboradores:</label><br />
-      <select multiple name="colaboradores" id="colaboradores" v-model="newRestricao.colaboradores">
-          <option v-for="(c, index) in colaboradores" :key="index" :value="c">{{c.matricula - c.nome}}</option>
+      <!-- <label v-if="newRestricao.nivelRisco != 0 || newRestricao.nivelRisco != '0'" for="colaboradores">Aplicável aos colaboradores:</label><br /> -->
+      <div v-if="newRestricao.restricaoGlobal != 1 || newRestricao.restricaoGlobal != '1'">
+      <label for="colaboradores456">Aplicável aos colaboradores:</label><br />
+      <select multiple name="colaboradores456" id="colaboradores456" v-model="newRestricao.colaboradores">
+          <option v-for="(c, index) in colaboradores" :key="index" :value="c">{{c.matricula + " - " + c.nome}}</option>
       </select>
-      <br /><br />
+      <br /><br /><br />
+      </div>
 
       <label for="areas">Aplicável às áreas:</label><br />
       <select multiple name="areas" id="areas" v-model="newRestricao.areas">
