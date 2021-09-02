@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <div v-if="$store.state.userAllowed">
     <div style="float: left;">
       <router-link to="/">
-          <button id="leave_btn" class="red_btn" style="left: 10px;">
+          <button @click="$store.dispatch('logOff');" id="leave_btn" class="red_btn" style="left: 10px;">
             Sair
           </button>
-      </router-link><br /><br /><br /><br /><br /><br /><br /><br />
+      </router-link>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="username_lbl">{{"Logado(a) como: " + $store.state.userName}}</span>
+      <br /><br /><br /><br /><br /><br /><br /><br />
           <p style="font-size: 23px; font-weight: 500; color: grey;">
               <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu Principal</u></b>
             </p>
@@ -60,6 +62,9 @@
       </canvas>
     </div>
   </div>
+  <div v-else>
+    <h1 style="padding: 50px; color: grey;">Erro 401: usuário não autorizado</h1>
+  </div>
 </template>
 
 
@@ -81,7 +86,7 @@ export default {
   methods: {
     addRegistro() {
       this.$store.dispatch('addRegistro', this.newRegistro);
-    },
+    }
   },
   
   mounted() {
@@ -224,6 +229,22 @@ export default {
   left: 15px;
   position: fixed;
   text-align: center;
+}
+
+#username_lbl {
+  top: -1px;
+  left: 43%;
+  position: fixed;
+  text-align: center;
+  /* text-shadow: 0 0 2.5px grey; */
+  box-shadow: 0 3px 3px lightgrey;
+  border: 1px solid grey;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 8px 3px;
+  font-size: smaller;
 }
 
 #company_btn {

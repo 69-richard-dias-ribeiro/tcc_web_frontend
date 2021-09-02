@@ -13,7 +13,7 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
     rel="stylesheet"
   />
-  <div class="container vertical-center" style="margin-top: 15%">
+  <div v-on:keyup.enter="onEnter" class="container vertical-center" style="margin-top: 15%">
     <div class="container h-100">
       <div class="row align-items-center">
         <div class="col-6">
@@ -34,19 +34,27 @@
             >
             
               <input
+                
                 id="login"
                 type="text"
                 placeholder="Matrícula"
+                v-model="this.user"
+
               /><br /><br />
               <input
+                
                 id="password_input"
                 :type="this.hidePassword ? 'password'  : 'text'"
-                placeholder="Senha" v-model="this.password"
+                placeholder="Senha"
+                v-model="this.password"
+
               /><span v-if="this.password" @click.stop="this.hidePassword = !this.hidePassword;"><img
                            :class="{hide : hidePassword, show: !hidePassword}"></span>
               
               <br /><br />
-              <router-link to="/pagina_inicial"><button class="login_button">Entrar</button></router-link>
+              <!-- <router-link to="/pagina_inicial"> -->
+              <button class="login_button" @click="checkAuthenticity();">Entrar</button>
+              <!-- </router-link> -->
             </div>
           </div>
         </div>
@@ -72,13 +80,24 @@ export default {
   data() {
     return {
       hidePassword: true,
+      user: undefined,
       password: undefined
     }
   },
   methods: {
+    onEnter: function() {
+       this.checkAuthenticity();
+    },
     passwordOnChange(input) {
       this.isPasswordEmpty = !input.nodeValue == '';
-    }
+    },
+    checkAuthenticity() {
+      if (!this.user || !this.password) {
+        alert('Informações de login não podem ficar vazias.');
+      } else {
+        this.$store.dispatch('checkAuthenticity', {usuario: this.user, senha: this.password});
+      }
+  }
   },
   beforeCreate() {
     this.$store.dispatch("loadEmpresa");

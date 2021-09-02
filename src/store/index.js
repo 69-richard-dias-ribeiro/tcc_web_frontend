@@ -1,4 +1,5 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+import router from '../router/index.js';
 
 export default createStore({
   state: {
@@ -9,7 +10,13 @@ export default createStore({
     colaboradores: [],
     usuarios: [],
     areas: [],
-    restricoes: []
+    restricoes: [],
+
+    /* ||||||||||||||||||||||||||||||||||||||
+    |||||||||||| Autenticação ;) ||||||||||||
+    |||||||||||||||||||||||||||||||||||||| */
+    userAllowed: false,
+    userName: null
   },
   mutations: {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -185,8 +192,19 @@ loadRegistros(state, registros) {
 deleteRegistro(state, id) {
   state.registros.splice(id, 1);
   localStorage.setItem('registros', JSON.stringify(state.registros));
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Autenticação mutations
+checkAuthenticity(state, obj) {
+  state.userAllowed = obj.resultado;
+  state.userName = obj.nomeDoCara;
+},
+logOff(state){
+  state.userAllowed = false;
+  state.userName = null;
 }
 },
+
   actions: {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Empresa actions
@@ -358,8 +376,54 @@ loadRegistros({ commit }) {
 },
 deleteRegistro({ commit }, id) {
   commit('deleteRegistro', id);
+},
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Autenticação actions
+checkAuthenticity({ commit }, usuarioEsenha) {
+  // alert('Verificando credenciais...');
+
+    var usuarios      = JSON.parse(localStorage.getItem('usuarios'));
+    var colaboradores = JSON.parse(localStorage.getItem('colaboradores'));
+    
+    console.log(usuarios);
+      console.log(colaboradores);
+        console.log(usuarioEsenha);    
+
+    let autorizado = false;
+    let nomeDoUsuario = null;
+
+  if (usuarios && colaboradores) {
+      
+      usuarios.forEach(u => {
+        if ( colaboradores.find(c => { return c.id == u.usuario }).matricula == usuarioEsenha.usuario &&
+             u.senha == usuarioEsenha.senha &&
+            (u.eadm == '1' ||
+             u.eadm == 1)) {
+                autorizado = true;
+                nomeDoUsuario = colaboradores.find(c => { return c.id == u.usuario }).nome;
+            }
+      });
+
+      if (autorizado) {
+        // alert('Verificação de credenciais concluída: credenciais válidas.');
+        alert('Bem vindo(a), ' + nomeDoUsuario + '!');
+        router.push('/pagina_inicial');
+        commit('checkAuthenticity', {resultado: autorizado, nomeDoCara: nomeDoUsuario});
+      } else {
+        alert('Erro: credenciais inválidas.');
+        commit('checkAuthenticity', {resultado: autorizado, nomeDoCara: nomeDoUsuario});
+      }
+             
+      } else {
+        alert('Erro: nenhum usuário e/ou colaborador cadastrado.');
+        commit('checkAuthenticity', {resultado: autorizado, nomeDoCara: nomeDoUsuario});
+      }
+},
+logOff({commit}) {
+  commit('logOff');
 }
 },
+
   modules: {
 
   }

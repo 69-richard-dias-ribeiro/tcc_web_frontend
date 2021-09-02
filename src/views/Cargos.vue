@@ -1,4 +1,4 @@
-<template>
+<template><div v-if="$store.state.userAllowed">
   <router-link to="/funcionarios">
     <button id="leave_btn" class="red_btn" style="left: 10px">Voltar</button>
   </router-link>
@@ -54,6 +54,10 @@
         </td>
       </tr>
     </table>
+  </div>
+  </div>
+  <div v-else>
+    <h1 style="padding: 50px; color: grey;">Erro 401: usuário não autorizado</h1>
   </div>
 </template>
 
