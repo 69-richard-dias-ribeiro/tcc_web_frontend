@@ -44,9 +44,9 @@
           </button>
       </router-link><br/><br/> -->
 
-      <router-link to="/" style="margin-left: 60px;">
-          <button id="data_btn" class="blue_btn">
-              Dados
+      <router-link to="/graficos" style="margin-left: 60px;">
+          <button id="charts_btn" class="blue_btn">
+              Gráficos
           </button>
       </router-link><br/><br/>
 
@@ -267,7 +267,7 @@ export default {
   width: 220px;
 }
 
-#data_btn {
+#charts_btn {
   background-image: url("../assets/data_icon.png");
   width: 220px;
 }
