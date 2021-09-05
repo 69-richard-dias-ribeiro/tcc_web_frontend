@@ -8,15 +8,32 @@
   <h1 style="position: fixed; left: 150px; top: 50px; color: grey; background: transparent;"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gráficos</u></h1>
   <br /><br /><br /><br />
 
+<br /><br />
+
+<div style="display: inline-block">
+    <span style="background-color: rgb(150, 150, 150); color: white; padding: 5px;">Nº de registros por data</span><br /><br />
+    <div style="width: 400px; height: 150px;">
+      <Chart1 />
+    </div>
+</div>
 
 
 
-  <div>
-  <div id="divGrafico1">
-      <canvas id="canvasGrafico1">
 
-      </canvas>
-  </div>
+
+
+
+
+
+
+  <!-- <div> -->
+  <!-- <div id="divGrafico1"> -->
+      <!-- <canvas id="canvasGrafico1">
+
+      </canvas> -->
+      <!-- <MonthlyChart /> -->
+      
+  <!-- </div>
         <div id="divGrafico2">
             <canvas id="canvasGrafico2">
 
@@ -43,7 +60,7 @@
 
 
 
-  </div>
+  </div> -->
   </div>
   <div v-else>
     <h1 style="padding: 50px; color: grey;">Erro 401: usuário não autorizado</h1>
@@ -52,7 +69,17 @@
 </template>
 
 <script>
-export default {};
+import { defineComponent } from 'vue'
+// import MonthlyChart from '../components/MonthlyChart.vue';
+import Chart1 from '../components/Chart1.vue';
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    // MonthlyChart
+    Chart1
+  }
+})
 </script>
 
 <style scoped>
