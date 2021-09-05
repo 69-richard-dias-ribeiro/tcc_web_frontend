@@ -47,6 +47,7 @@
   </div>
   <div v-else>
     <h1 style="padding: 50px; color: grey;">Erro 401: usuário não autorizado</h1>
+    <router-link to="/">Página de login</router-link>
   </div>
 </template>
 
@@ -63,7 +64,7 @@ export default {};
   width: 50%;
   height: 37%;
 
-  border: 0.5px solid grey;
+  border: 0px solid grey;
   box-shadow: 0 0 5px grey;
 }
 
@@ -75,7 +76,7 @@ export default {};
   width: 47%;
   height: 37%;
 
-  border: 0.5px solid grey;
+  border: 0px solid grey;
   box-shadow: 0 0 5px grey;
 }
 
@@ -87,7 +88,7 @@ export default {};
   width: 40%;
   height: 37%;
 
-  border: 0.5px solid grey;
+  border: 0px solid grey;
   box-shadow: 0 0 5px grey;
 }
 
@@ -99,7 +100,7 @@ export default {};
   width: 28%;
   height: 37%;
 
-  border: 0.5px solid grey;
+  border: 0px solid grey;
   box-shadow: 0 0 5px grey;
 }
 
@@ -111,7 +112,7 @@ export default {};
   width: 28%;
   height: 37%;
 
-  border: 0.5px solid grey;
+  border: 0px solid grey;
   box-shadow: 0 0 5px grey;
 }
 

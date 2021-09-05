@@ -406,7 +406,7 @@ checkAuthenticity({ commit }, usuarioEsenha) {
 
       if (autorizado) {
         // alert('Verificação de credenciais concluída: credenciais válidas.');
-        alert('Bem vindo(a), ' + nomeDoUsuario + '!');
+        // alert('Bem vindo(a), ' + nomeDoUsuario + '!');
         router.push('/pagina_inicial');
         commit('checkAuthenticity', {resultado: autorizado, nomeDoCara: nomeDoUsuario});
       } else {
