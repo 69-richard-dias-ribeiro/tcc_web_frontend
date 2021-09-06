@@ -92,6 +92,13 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Inclusão ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div v-if="listagemInclusaoEdicaoMode == 2"><br /><br />
 
+<button class="orientations_btn" @click="exibirOrientacoes = !exibirOrientacoes;">&#9432;&nbsp;Orientações</button><br /><br />
+<div v-if="exibirOrientacoes" style="border: 2px solid grey; background-color: yellow; padding: 5px; text-align: left;">
+  <span style="background-color: yellow;">&#9679;&nbsp;Use pontos como separadores decimais, não vírgulas. Incorreto: 41,40338. Correto: 41.40338.</span><br />
+  <span style="background-color: yellow;">&#9679;&nbsp;<b style="background-color: yellow;  ">Dica:</b> para obter as coordenadas, considere utilizar o programa <a href="https://earth.google.com/web/" target="_blank">Google Earth</a></span>
+</div>
+<br />
+
       <label for="titulo">Título:</label><br />
       <input type="text" id="titulo" v-model="newArea.titulo" />
       <br /><br />
@@ -153,6 +160,13 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Edição ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div v-if="listagemInclusaoEdicaoMode == 3"><br /><br />
       
+<button class="orientations_btn" @click="exibirOrientacoes = !exibirOrientacoes;">&#9432;&nbsp;Orientações</button><br /><br />
+<div v-if="exibirOrientacoes" style="border: 2px solid grey; background-color: yellow; padding: 5px; text-align: left;">
+  <span style="background-color: yellow;">&#9679;&nbsp;Use pontos como separadores decimais, não vírgulas. Incorreto: 41,40338. Correto: 41.40338.</span><br />
+  <span style="background-color: yellow;">&#9679;&nbsp;<b style="background-color: yellow;  ">Dica:</b> para obter as coordenadas, considere utilizar o programa <a href="https://earth.google.com/web/" target="_blank">Google Earth</a></span>
+</div>
+<br />
+
       <label for="titulo">Título:</label><br />
       <input type="text" id="titulo" v-model="newArea.titulo" />
       <br /><br />
@@ -227,7 +241,8 @@ export default {
                 coordenadas: []
             },
             newLongitude: null,
-            newLatitude: null
+            newLatitude: null,
+            exibirOrientacoes: false
         }
     },
     computed: {
@@ -503,4 +518,19 @@ select option {
   cursor: pointer;
 }
 
+.orientations_btn {
+  border: none;
+  padding: 2.5px 8px;
+  background-color: rgb(150, 150, 150);
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.orientations_btn:hover {
+  background-color: grey;
+}
 </style>
