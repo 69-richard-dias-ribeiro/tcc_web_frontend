@@ -2,8 +2,8 @@
   <router-link to="/pagina_inicial">
     <button id="leave_btn" class="red_btn" style="left: 10px">Voltar</button>
   </router-link>
-  <h1 style="position: fixed; left: 150px; top: 50px; color: grey">
-    <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opções de cadastramento</u>
+  <h1 style="position: fixed; left: 150px; top: 50px; color: grey; background: transparent;">
+    <u style="background: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opções de cadastramento</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
 

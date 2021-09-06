@@ -34,11 +34,24 @@ export default defineComponent({
       datasets: [
         {
           label: 'Nº de Registros',
-          backgroundColor: '#f87979',
-          data: this.numeroRegistrosPorData
+          backgroundColor: 'red',
+          data: this.numeroRegistrosPorData,
+          fill: false,
+          pointRadius: 10,
+          borderColor: 'red'
         }
       ]
-    })
+    },
+    {
+      scales: {
+        yAxes: [{
+          ticks: {
+            stepSize: 1
+          }
+        }]
+      }
+    }
+    )
   }
 });
 </script>

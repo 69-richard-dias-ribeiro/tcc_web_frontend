@@ -2,8 +2,8 @@
   <router-link to="/pagina_inicial">
     <button id="leave_btn" class="red_btn" style="left: 10px">Voltar</button>
   </router-link>
-  <h1 style="position: fixed; left: 150px; top: 50px; color: grey">
-    <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registros</u>
+  <h1 style="position: fixed; left: 150px; top: 50px; color: grey; background: transparent;">
+    <u style="background: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registros</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
   <h3 v-if="!registros || registros.length <= 0" style="color: grey">
@@ -58,13 +58,13 @@
         <td style="padding-right: 15px; border: 0.25px solid grey;" v-if="new Date(dataMinima) && new Date(dataMaxima) && r.data >= dataMinima && r.data <= dataMaxima">
           {{ formatarDataPtBR(r.data) }}
         </td>
-        <td :title="tooltipColaboradores(colaboradores.find(c => { return c.id == r.colaborador }))" style="cursor: zoom-in; padding-right: 15px; border: 0.25px solid grey;" v-if="new Date(dataMinima) && new Date(dataMaxima) && r.data >= dataMinima && r.data <= dataMaxima">
+        <td :title="tooltipColaboradores(colaboradores.find(c => { return c.id == r.colaborador }))" class="metadata_td" style="cursor: zoom-in; padding-right: 15px; border: 0.25px solid grey;" v-if="new Date(dataMinima) && new Date(dataMaxima) && r.data >= dataMinima && r.data <= dataMaxima">
           {{ colaboradores.find(c => { return c.id == r.colaborador }).matricula }}
         </td>
-        <td :title="tooltipAreas(areas.find(a => { return a.id == r.area }))" style="cursor: zoom-in; padding-right: 15px; border: 0.25px solid grey;" v-if="new Date(dataMinima) && new Date(dataMaxima) && r.data >= dataMinima && r.data <= dataMaxima">
+        <td :title="tooltipAreas(areas.find(a => { return a.id == r.area }))" class="metadata_td" style="cursor: zoom-in; padding-right: 15px; border: 0.25px solid grey;" v-if="new Date(dataMinima) && new Date(dataMaxima) && r.data >= dataMinima && r.data <= dataMaxima">
           {{ areas.find(a => { return a.id == r.area }).titulo }}
         </td>
-        <td :title="tooltipRestricoes(restricoes.find(restricao => { return restricao.id == r.restricao }))" style="cursor: zoom-in; padding-right: 15px; border: 0.25px solid grey;" v-if="new Date(dataMinima) && new Date(dataMaxima) && r.data >= dataMinima && r.data <= dataMaxima">
+        <td :title="tooltipRestricoes(restricoes.find(restricao => { return restricao.id == r.restricao }))" class="metadata_td" style="cursor: zoom-in; padding-right: 15px; border: 0.25px solid grey;" v-if="new Date(dataMinima) && new Date(dataMaxima) && r.data >= dataMinima && r.data <= dataMaxima">
           {{ restricoes.find(restricao => { return restricao.id == r.restricao }).titulo }}
         </td>
 
@@ -284,6 +284,15 @@ input[type="date"] {
 
 .filter_btn:hover {
   background-color: #1664ca;
+}
+
+.metadata_td:hover {
+  background-color: lightgrey;
+  box-shadow: 0 0 20px rgb(100, 100, 100);
+  transition-delay: 0ms;
+  transition-duration: 1s;
+  transition-property: box-shadow;
+  transition-timing-function: ease-out;
 }
 
 </style>

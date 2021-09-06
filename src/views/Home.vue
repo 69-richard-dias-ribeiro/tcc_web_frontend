@@ -8,8 +8,8 @@
       </router-link>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="username_lbl">{{"Logado(a) como: " + $store.state.userName}}</span>
       <br /><br /><br /><br /><br /><br /><br /><br />
-          <p style="font-size: 23px; font-weight: 500; color: grey;">
-              <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu Principal</u></b>
+          <p style="font-size: 23px; font-weight: 500; color: grey; background: transparent;">
+              <b><u style="background: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu Principal</u></b>
             </p>
 
 

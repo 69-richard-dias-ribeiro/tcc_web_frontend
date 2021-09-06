@@ -2,8 +2,8 @@
   <router-link to="/pagina_inicial">
     <button id="leave_btn" class="red_btn" style="left: 10px">Voltar</button>
   </router-link>
-  <h1 style="position: fixed; left: 150px; top: 50px; color: grey">
-    <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Áreas</u>
+  <h1 style="position: fixed; left: 150px; top: 50px; color: grey; background: transparent;">
+    <u style="background: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Áreas</u>
   </h1>
   <br /><br /><br /><br /><br /><br />
   <h3 v-if="(!areas || areas.length <= 0) && (listagemInclusaoEdicaoMode == 1)" style="color: grey">
@@ -204,11 +204,12 @@
   </div>
   <div v-else>
     <h1 style="padding: 50px; color: grey;">Erro 401: usuário não autorizado</h1>
-    <router-link to="">Página de login</router-link>
+    <router-link to="/">Página de login</router-link>
   </div>
 </template>
 
 <script>
+
 export default {
     data() {
         return {

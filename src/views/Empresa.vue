@@ -4,7 +4,7 @@
             Voltar
           </button>
       </router-link>
-  <h1 style="position: fixed; left: 150px; top: 50px; color: grey;"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empresa</u></h1>
+  <h1 style="position: fixed; left: 150px; top: 50px; color: grey; background: transparent;"><u style="background: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empresa</u></h1>
   <br /><br /><br /><br /><br /><br />
 
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Inclusão ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

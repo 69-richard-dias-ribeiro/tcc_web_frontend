@@ -5,16 +5,42 @@
             Voltar
           </button>
       </router-link>
-  <h1 style="position: fixed; left: 150px; top: 50px; color: grey; background: transparent;"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gráficos</u></h1>
+  <h1 style="position: fixed; left: 150px; top: 50px; color: grey; background: transparent;"><u style="background: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gráficos</u></h1>
   <br /><br /><br /><br />
 
 <br /><br />
 
-<div style="display: inline-block">
-    <span style="background-color: rgb(150, 150, 150); color: white; padding: 5px;">Nº de registros por data</span><br /><br />
-    <div style="width: 400px; height: 150px;">
+    <div style="display: inline-block;">
+    <span style="background-color: gray; color: white; padding: 5px;">Nº de Registros por <u>Data</u></span><br /><br />
+    <div style="width: 300px; height: 50px; text-align: center;">
       <Chart1 />
     </div>
+    <br /><br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <span style="background-color: gray; color: white; padding: 5px;">Nº de Registros por <u>Área</u></span>
+    <br /><br />
+    <div style="width: 300px; height: 50px; text-align: center;">
+      <Chart2 />
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />/><br /><br /><br /><br /><br /><br />
+    <span style="background-color: gray; color: white; padding: 5px;">Nº de Registros por <u>Colaborador</u></span>
+    <br /><br />
+    <div style="width: 300px; height: 50px; text-align: center;">
+      <Chart3 />
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />/><br /><br /><br /><br /><br /><br /><br />
+    <span style="background-color: gray; color: white; padding: 5px;">Nº de Registros por <u>Tipo de Restrição</u></span>
+    <br /><br />
+    <div style="width: 300px; height: 50px; text-align: center;">
+      <Chart4 />
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />/><br /><br /><br /><br /><br /><br /><br />
+    <span style="background-color: gray; color: white; padding: 5px;">Nº de Registros por <u>Nível de Risco</u></span>
+    <br /><br />
+    <div style="width: 300px; height: 50px; text-align: center;">
+      <Chart5 />
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />/><br /><br /><br /><br /><br /><br /><br />
 </div>
 
 
@@ -72,12 +98,20 @@
 import { defineComponent } from 'vue'
 // import MonthlyChart from '../components/MonthlyChart.vue';
 import Chart1 from '../components/Chart1.vue';
+import Chart2 from '../components/Chart2.vue';
+import Chart3 from '../components/Chart3.vue';
+import Chart4 from '../components/Chart4.vue';
+import Chart5 from '../components/Chart5.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     // MonthlyChart
-    Chart1
+    Chart1,
+    Chart2,
+    Chart3,
+    Chart4,
+    Chart5
   }
 })
 </script>

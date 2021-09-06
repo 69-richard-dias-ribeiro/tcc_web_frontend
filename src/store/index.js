@@ -385,9 +385,9 @@ checkAuthenticity({ commit }, usuarioEsenha) {
     var usuarios      = JSON.parse(localStorage.getItem('usuarios'));
     var colaboradores = JSON.parse(localStorage.getItem('colaboradores'));
     
-    console.log(usuarios);
-      console.log(colaboradores);
-        console.log(usuarioEsenha);    
+    // console.log(usuarios);
+    //   console.log(colaboradores);
+    //     console.log(usuarioEsenha);    
 
     let autorizado = false;
     let nomeDoUsuario = null;
