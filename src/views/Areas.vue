@@ -120,10 +120,10 @@
 
 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px;"/>Longitude:&nbsp;&nbsp;
-      <input type="number" id="longitude" v-model="newLongitude" />
+      <input v-on:keyup.enter="addNewCoordenadaToNewArea();" type="number" id="longitude" v-model="newLongitude" />
       <br/>
       &nbsp;&nbsp;&nbsp;&nbsp;<img src="../assets/latitude_icon.png" style="width: 30px;"/>Latitude:&nbsp;&nbsp;
-      <input type="number" id="latitude" v-model="newLatitude" />
+      <input v-on:keyup.enter="addNewCoordenadaToNewArea();" type="number" id="latitude" v-model="newLatitude" />
       <br /><br />
       
 
@@ -177,10 +177,10 @@
       <h3><u>Coordenadas dos vértices da área</u></h3>
 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../assets/longitude_icon.png" style="width: 30px;"/>Longitude:&nbsp;&nbsp;
-      <input type="number" id="longitude" v-model="newLongitude" />
+      <input v-on:keyup.enter="addNewCoordenadaToNewArea();" type="number" id="longitude" v-model="newLongitude" />
       <br/>
       &nbsp;&nbsp;&nbsp;&nbsp;<img src="../assets/latitude_icon.png" style="width: 30px;"/>Latitude:&nbsp;&nbsp;
-      <input type="number" id="latitude" v-model="newLatitude" />
+      <input v-on:keyup.enter="addNewCoordenadaToNewArea();" type="number" id="latitude" v-model="newLatitude" />
       <br /><br />
       
 

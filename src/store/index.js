@@ -22,8 +22,8 @@ export default createStore({
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Empresa mutations
     editEmpresa(state, empresa) {
-      localStorage.setItem('empresa', JSON.stringify(empresa));
       state.empresa = empresa;
+      localStorage.setItem('empresa', JSON.stringify(empresa));
       alert('Informações da empresa salvas com sucesso.');
     },
     loadEmpresa(state, empresa) {
@@ -52,6 +52,7 @@ export default createStore({
     },
     editDepartamento(state, objForEditing) {
       state.departamentos[objForEditing.idOfNewDepartment].nome = objForEditing.newDepartamento.nome;
+      localStorage.setItem('departamentos', JSON.stringify(state.departamentos));
     },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Cargo/Cargos mutations
@@ -76,6 +77,7 @@ deleteCargo(state, id) {
 },
 editCargo(state, objForEditing) {
   state.cargos[objForEditing.idOfNewRole].nome = objForEditing.newCargo.nome;
+  localStorage.setItem('cargos', JSON.stringify(state.cargos));
 },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Colaborador/Colaboradores mutations
@@ -96,6 +98,7 @@ loadColaboradores(state, colaboradores) {
 },
 editColaborador(state, objForEditing) {
   state.colaboradores[objForEditing.idOfNewColaborador] = objForEditing.colaboradorForEditing;
+  localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
 },
 deleteColaborador(state, id) {
   state.colaboradores.splice(id, 1);
@@ -120,6 +123,7 @@ loadUsuarios(state, usuarios) {
 },
 editUsuario(state, objForEditing) {
   state.usuarios[objForEditing.idOfNewUsuario] = objForEditing.usuarioForEditing;
+  localStorage.setItem('usuarios', JSON.stringify(state.usuarios));
 },
 deleteUsuario(state, id) {
   state.usuarios.splice(id, 1);
@@ -144,6 +148,7 @@ loadAreas(state, areas) {
 },
 editArea(state, objForEditing) {
   state.areas[objForEditing.idOfNewArea] = objForEditing.areaForEditing;
+  localStorage.setItem('areas', JSON.stringify(state.areas));
 },
 deleteArea(state, id) {
   state.areas.splice(id, 1);
@@ -168,6 +173,7 @@ loadRestricoes(state, restricoes) {
 },
 editRestricao(state, objForEditing) {
   state.restricoes[objForEditing.idOfNewRestricao] = objForEditing.restricaoForEditing;
+  localStorage.setItem('restricoes', JSON.stringify(state.restricoes));
 },
 deleteRestricao(state, id) {
   state.restricoes.splice(id, 1);
