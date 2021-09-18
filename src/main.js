@@ -2,11 +2,13 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-//import {library} from '@fortawesome/fontawesome-svg-core'
-//import {fas} from '@fortawesome/free-solid-svg-icons'
-//import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
-//library.add(fas);
-//Vue.component('font-awesome-icon', FontAwesomeIcon);
+import OpenLayersMap from 'vue3-openlayers'
+import 'vue3-openlayers/dist/vue3-openlayers.css'
 
-createApp(App).use(store).use(router).mount('#app')
+// createApp(App).use(store).use(router).use(OpenLayersMap).mount('#app');
+const app = createApp(App);
+app.use(OpenLayersMap)
+app.use(router)
+app.use(store)
+app.mount('#app')

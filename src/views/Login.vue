@@ -29,7 +29,6 @@
                 padding: 30px;
                 box-shadow: 0 0 3px gray;
                 border-radius: 10px;
-                background-color: white;
               "
             >
             
@@ -111,8 +110,8 @@ export default {
 </script>
 
 <style>
-* {
-  background-color: #f6f6f6;
+div {
+  background-color: #F6F6F6;
 }
 
 input {
@@ -152,6 +151,7 @@ input {
   border: 0.5px solid grey;
   border-radius: 100%;
   cursor: pointer;
+  background-color: #F6F6F6;
 }
 
 .hide {
@@ -164,7 +164,9 @@ input {
   border-radius: 100%;
   cursor: pointer;
   filter: brightness(75%);
+  background-color: #F6F6F6;
 }
+
 
 .hide:hover, .show:hover{
  box-shadow: 0 0 5px grey;

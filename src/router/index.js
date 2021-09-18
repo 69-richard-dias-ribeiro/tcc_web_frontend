@@ -11,6 +11,7 @@ import Areas from '../views/Areas.vue';
 import Restricoes from '../views/Restricoes.vue';
 import Registros from '../views/Registros.vue';
 import Graficos from '../views/Graficos.vue';
+import teste_mapa from '../views/Teste.vue';
 
 const routes = [
   {
@@ -81,6 +82,12 @@ const routes = [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
+  ,
+  {
+    path: '/teste_mapa',
+    name: 'teste_mapa',
+    component: teste_mapa
+  }
 ]
 
 const router = createRouter({
