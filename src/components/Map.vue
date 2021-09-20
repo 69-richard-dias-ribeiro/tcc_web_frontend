@@ -7,7 +7,32 @@
     <ol-tile-layer>
         <ol-source-osm />
     </ol-tile-layer>
-    
+
+    <!-- <ol-source-vector>
+            <ol-feature>
+                <ol-geom-polygon :coordinates=""></ol-geom-polygon>
+                <ol-style>
+                    <ol-style-stroke :color="strokeColor" :width="strokeWidth"></ol-style-stroke>
+                </ol-style>
+            </ol-feature>
+
+    </ol-source-vector> -->
+
+    <div v-for="(area, index) in areasProntasParaDesenhar" :key="index">
+    <ol-vector-layer>
+        <ol-source-vector>
+            <ol-feature>
+                <ol-geom-polygon :coordinates="[area]"></ol-geom-polygon>
+                <ol-style>
+                    <ol-style-stroke :color="strokeColor" :width="strokeWidth"></ol-style-stroke>
+                </ol-style>
+            </ol-feature>
+
+        </ol-source-vector>
+
+    </ol-vector-layer>
+    </div>
+
 </ol-map>
 </template>
 
@@ -60,6 +85,31 @@ export default {
             console.log('Centro - longitude: ' + longitude + ' | Centro - latitude: ' + latitude);
 
             return [longitude, latitude];
+        },
+        // retorna o conjunto do conjunto de coordenadas de cada área registrada
+        areasProntasParaDesenhar: function () {
+            
+            var retorno = [];
+
+            this.areas.forEach(function(a) {
+                var coordenadas = Object.assign({},a.coordenadas);
+                var resultado = [];
+
+                for(let i = 0; i < 4; i++) {
+                resultado.push(
+                                [
+                                    parseFloat(Object.assign([], coordenadas[i])[0]),
+                                    parseFloat(Object.assign([], coordenadas[i])[1])
+                                ]
+                             );
+                }
+                
+                retorno.push(resultado);
+            });
+
+            //console.log(retorno);
+            return retorno;
+
         }
     },
 
@@ -72,6 +122,8 @@ export default {
 
     mounted() {
       this.obterCentroDoMapa;
+      this.areasProntasParaDesenhar;
+    
     },
 
     data () {
@@ -81,6 +133,10 @@ export default {
         projection: "EPSG:4326",
         zoom:       18,
         rotation:   0,
+
+        radius: 40,
+        strokeWidth: 2,
+        strokeColor: 'red',
 
         newRegistro:
         {
