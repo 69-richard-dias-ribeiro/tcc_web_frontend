@@ -28,6 +28,26 @@
                 </ol-style>
             </ol-feature>
 
+            
+
+        </ol-source-vector>
+
+    </ol-vector-layer>
+    </div>
+
+    <div v-for="(c, index) in colaboradores" :key="index">
+    <ol-vector-layer>
+        <ol-source-vector>
+            <ol-feature>
+                <ol-geom-point :coordinates="[c.ultimaLongitude, c.ultimaLatitude]"></ol-geom-point>
+                <ol-style>
+                    <ol-style-circle :radius="10">
+                        <ol-style-fill :color="'white'"></ol-style-fill>
+                        <ol-style-stroke :color="'black'" :width="2"></ol-style-stroke>
+                    </ol-style-circle>
+                </ol-style>
+            </ol-feature>
+
         </ol-source-vector>
 
     </ol-vector-layer>
@@ -88,7 +108,6 @@ export default {
         },
         // retorna o conjunto do conjunto de coordenadas de cada área registrada
         areasProntasParaDesenhar: function () {
-            
             var retorno = [];
 
             this.areas.forEach(function(a) {
@@ -109,8 +128,30 @@ export default {
 
             //console.log(retorno);
             return retorno;
+        },
 
-        }
+        /* uma vez tendo as posições dos colaboradores sido atualizada,
+           gerar um array contendo a última localização de cada um. */
+        // posColaboradoresProntasParaDesenhar: function () {
+        //     var retorno = [];
+
+        //     this.colaboradores.forEach(function(c) {
+        //         var resultado = [];
+
+        //         resultado.push(
+        //                         [
+        //                             parseFloat(c.ultimaLongitude),
+        //                             parseFloat(c.ultimaLatitude)
+        //                         ]
+        //                      );
+                
+        //         retorno.push(resultado);
+        //     });
+
+        //     console.log('Ronaldo... brilha mto no Corinthians rs');
+        //     console.log(retorno);
+        //     return retorno;
+        // }
     },
 
     beforeCreate() {
@@ -122,8 +163,8 @@ export default {
 
     mounted() {
       this.obterCentroDoMapa;
+    //   this.posColaboradoresProntasParaDesenhar;
       this.areasProntasParaDesenhar;
-    
     },
 
     data () {

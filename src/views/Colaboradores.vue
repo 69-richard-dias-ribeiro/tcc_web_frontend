@@ -214,7 +214,9 @@ export default {
                 dataNasc: null,
                 dataAdmissao: null,
                 departamento: null,
-                cargo: null
+                cargo: null,
+                ultimaLongitude: -1,
+                ultimaLatitude: -1
             }
         }
     },
@@ -251,7 +253,9 @@ export default {
                 dataNasc: null,
                 dataAdmissao: null,
                 departamento: null,
-                cargo: null
+                cargo: null,
+                ultimaLongitude: -1,
+                ultimaLatitude: -1
       }
     },
     prepararFormEdicao(colaborador) {
@@ -266,7 +270,9 @@ export default {
                 dataNasc: colaborador.dataNasc,
                 dataAdmissao: colaborador.dataAdmissao,
                 departamento: colaborador.departamento,
-                cargo: colaborador.cargo
+                cargo: colaborador.cargo,
+                ultimaLongitude: colaborador.ultimaLongitude,
+                ultimaLatitude: colaborador.ultimaLatitude
       }
     },
     addColaborador() {
