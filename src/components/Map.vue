@@ -106,6 +106,7 @@ export default {
 
             return [longitude, latitude];
         },
+
         // retorna o conjunto do conjunto de coordenadas de cada área registrada
         areasProntasParaDesenhar: function () {
             var retorno = [];
@@ -130,28 +131,6 @@ export default {
             return retorno;
         },
 
-        /* uma vez tendo as posições dos colaboradores sido atualizada,
-           gerar um array contendo a última localização de cada um. */
-        // posColaboradoresProntasParaDesenhar: function () {
-        //     var retorno = [];
-
-        //     this.colaboradores.forEach(function(c) {
-        //         var resultado = [];
-
-        //         resultado.push(
-        //                         [
-        //                             parseFloat(c.ultimaLongitude),
-        //                             parseFloat(c.ultimaLatitude)
-        //                         ]
-        //                      );
-                
-        //         retorno.push(resultado);
-        //     });
-
-        //     console.log('Ronaldo... brilha mto no Corinthians rs');
-        //     console.log(retorno);
-        //     return retorno;
-        // }
     },
 
     beforeCreate() {
@@ -164,14 +143,14 @@ export default {
     mounted() {
       this.obterCentroDoMapa;
       this.areasProntasParaDesenhar;
-
+      
       // a função abaixo serve para testar e demonstrar o funcionamento da função de detecção de restrições
       // infringidas. Nome = geraPosicoesAleatoriasColaboradores
       setInterval(()=>{
 
             // modo == 1: posições geradas por toda a empresa                   (dinâmico)
-            // modo == 2: posições geradas em uma porção específica da empresa  (estático)
-            // modo == 3: posições geradas em uma porção ainda mais específica  (estático)
+            // modo == 2: posições geradas em uma porção específica da empresa  (estático - testes)
+            // modo == 3: posições geradas em uma porção ainda mais específica  (estático - testes)
             var modo = 2;
 
             if (modo == 1) {
@@ -253,6 +232,23 @@ export default {
         } else {
             return false;
         }
+    },
+
+    c1ProximoC2(posColab1, posColab2, proximidadeMaxima) {
+        let lat1 = posColab1[1];
+        let lon1 = posColab1[0];
+        let lat2 = posColab2[1];
+        let lon2 = posColab2[0];
+        
+        function toRad(x) {return x * Math.PI / 180;}
+
+        var R = 6371; // km
+        var dLon = toRad(lon2 - lon1);
+        lat1 = toRad(lat1);
+        lat2 = toRad(lat2);
+        var d = Math.acos(Math.sin(lat1)*Math.sin(lat2) + Math.cos(lat1)*Math.cos(lat2) * Math.cos(dLon)) * R;
+
+        return (d * 1000) < proximidadeMaxima;
     }
 
     },
