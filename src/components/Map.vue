@@ -197,6 +197,7 @@ export default {
                     c.ultimaLongitude = (Math.random() * (minLong2 - maxLong2) + maxLong2).toFixed(6);
                     c.ultimaLatitude =  (Math.random() * (minLat2 - maxLat2) + maxLat2).toFixed(6);
                 });
+
             } else {
                 var minLong3 = -47.017600;
                 var maxLong3 = -47.016800;
@@ -238,7 +239,22 @@ export default {
     methods: {
     addRegistro() {
             this.$store.dispatch('addRegistro', this.newRegistro);
+        },
+
+    colaboradorDentroArea(posColab, v1, v3) {
+        let minLong = v3[0];
+        let maxLong = v1[0];
+        let minLat = v1[1];
+        let maxLat = v3[1];
+
+        if (posColab[0] > minLong && posColab[0] < maxLong &&
+            posColab[1] < minLat && posColab[1] > maxLat) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
     },
 
   }
