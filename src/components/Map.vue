@@ -151,7 +151,7 @@ export default {
             // modo == 1: posições geradas por toda a empresa                   (dinâmico)
             // modo == 2: posições geradas em uma porção específica da empresa  (estático - testes)
             // modo == 3: posições geradas em uma porção ainda mais específica  (estático - testes)
-            var modo = 2;
+            var modo = 1;
 
             if (modo == 1) {
                 var areaDaEmpresa = Object.assign({}, this.areas.find(a => a.titulo.toLowerCase().trim() == 'empresa'));
@@ -189,7 +189,9 @@ export default {
                 });
             }
 
-        }, 2000);
+            this.monitoramentoDeRestricoes();
+        }, 3000);
+
     },
 
     data () {
@@ -221,13 +223,18 @@ export default {
         },
 
     colaboradorDentroArea(posColab, v1, v3) {
-        let minLong = v3[0];
-        let maxLong = v1[0];
-        let minLat = v1[1];
-        let maxLat = v3[1];
+        let minLong = parseFloat(v3[0]);
+        let maxLong = parseFloat(v1[0]);
+        let minLat  = parseFloat(v3[1]);
+        let maxLat  = parseFloat(v1[1]);
 
-        if (posColab[0] > minLong && posColab[0] < maxLong &&
-            posColab[1] < minLat && posColab[1] > maxLat) {
+        let longColab = parseFloat(posColab[0]);
+        let latColab  = parseFloat(posColab[1]);
+
+        if ((longColab > minLong) &&
+            (longColab < maxLong) &&
+            (latColab  > minLat)   && 
+            (latColab  < maxLat)) {
             return true;
         } else {
             return false;
@@ -249,6 +256,98 @@ export default {
         var d = Math.acos(Math.sin(lat1)*Math.sin(lat2) + Math.cos(lat1)*Math.cos(lat2) * Math.cos(dLon)) * R;
 
         return (d * 1000) < proximidadeMaxima;
+    },
+
+    monitoramentoDeRestricoes() {
+        // this.$store.dispatch("loadColaboradores");
+
+        //------------------- IMPORTANTE ---------------------
+        // lembrar de descomentar essa linha do loadColaboradores
+        // quando for pra rodar com as posições recebidas pelo app, tá ;)
+        // ---------------------------------------------------
+
+        var restricoesAcesso =         this.restricoes.filter(r => r.tipo == 1);
+        var restricoesDistanciamento = this.restricoes.filter(r => r.tipo == 2);
+
+            restricoesAcesso = JSON.parse(JSON.stringify(restricoesAcesso));
+            restricoesDistanciamento = JSON.parse(JSON.stringify(restricoesDistanciamento));
+        var colaboradoresForaDoProxy = JSON.parse(JSON.stringify(this.colaboradores));
+        var areas1ForaDoProxy;
+        var areas2ForaDoProxy;
+    
+        colaboradoresForaDoProxy.forEach((c1) => {
+
+            // verificação de acesso restrito
+            // ------------------------------
+            restricoesAcesso.forEach((r1) => {
+                areas1ForaDoProxy = JSON.parse(JSON.stringify(r1.areas));
+
+                areas1ForaDoProxy.forEach((a1) => {
+
+                    //verifica se a restrição é aplicável para o colaborador atual (c1)
+                    let restricaoAplicavelAoC1 = false;
+
+                    for (let i = 0; i < r1.colaboradores.length; i++) {
+                        if (c1.matricula == r1.colaboradores[i].matricula) restricaoAplicavelAoC1 = true;
+                    }
+                    
+                    if ( (r1.restricaoGlobal == 1 || restricaoAplicavelAoC1) &&
+                         this.colaboradorDentroArea([c1.ultimaLongitude, c1.ultimaLatitude], a1.coordenadas[0], a1.coordenadas[2]) ) {
+                             console.log(new Date().toLocaleString() + " - violação de acesso restrito detectada");
+                             this.newRegistro.data = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
+                             this.newRegistro.colaborador = c1.id;
+                             this.newRegistro.area = a1.id;
+                             this.newRegistro.restricao = r1.id;
+
+                             this.addRegistro();
+                         }
+                });
+            });
+
+            //verificação de distanciamento
+            // ----------------------------
+            colaboradoresForaDoProxy.forEach((c2) => {
+                
+                if (c1.matricula != c2.matricula) {
+                    restricoesDistanciamento.forEach((r2) => {
+                        areas2ForaDoProxy = JSON.parse(JSON.stringify(r2.areas));
+
+                        areas2ForaDoProxy.forEach((a2) => {
+
+                            
+                            let restricaoAplicavelAoC1 = false;
+                            let restricaoAplicavelAoC2 = false;
+
+                            //verifica se a restrição é aplicável para o colaborador atual 1 (c1)
+                            for (let j = 0; j < r2.colaboradores.length; j++) {
+                                if (c1.matricula == r2.colaboradores[j].matricula) restricaoAplicavelAoC1 = true;
+                            }
+
+                            //verifica se a restrição é aplicável para o colaborador atual 2 (c2)
+                            for (let k = 0; k < r2.colaboradores.length; k++) {
+                                if (c2.matricula == r2.colaboradores[k].matricula) restricaoAplicavelAoC2 = true;
+                            }
+
+                            if ( ((r2.restricaoGlobal == 1) || (restricaoAplicavelAoC1 && restricaoAplicavelAoC2))   &&
+                                   this.colaboradorDentroArea([c1.ultimaLongitude, c1.ultimaLatitude], a2.coordenadas[0], a2.coordenadas[2]) &&
+                                   this.colaboradorDentroArea([c2.ultimaLongitude, c2.ultimaLatitude], a2.coordenadas[0], a2.coordenadas[2]) &&
+                                   this.c1ProximoC2([c1.ultimaLongitude, c1.ultimaLatitude],
+                                                    [c2.ultimaLongitude, c2.ultimaLatitude], 50) ) {
+                                                        console.log(new Date().toLocaleString() + " - violação de distanciamento social detectada");
+                                                        this.newRegistro.data = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
+                                                        this.newRegistro.colaborador = c1.id;
+                                                        this.newRegistro.area = a2.id;
+                                                        this.newRegistro.restricao = r2.id;
+
+                                                        this.addRegistro();
+                                                    } 
+                               
+                        });
+                    });
+                }
+
+            });
+        });
     }
 
     },
