@@ -151,7 +151,8 @@ export default {
             // modo == 1: posições geradas por toda a empresa                   (dinâmico)
             // modo == 2: posições geradas em uma porção específica da empresa  (estático - testes)
             // modo == 3: posições geradas em uma porção ainda mais específica  (estático - testes)
-            var modo = 1;
+            // modo == 4: teste desativado
+            var modo = 4;
 
             if (modo == 1) {
                 var areaDaEmpresa = Object.assign({}, this.areas.find(a => a.titulo.toLowerCase().trim() == 'empresa'));
@@ -177,7 +178,7 @@ export default {
                     c.ultimaLatitude =  (Math.random() * (minLat2 - maxLat2) + maxLat2).toFixed(6);
                 });
 
-            } else {
+            } else if (modo == 3){
                 var minLong3 = -47.017600;
                 var maxLong3 = -47.016800;
                 var minLat3 =  -22.717700;
@@ -283,7 +284,7 @@ export default {
                 areas1ForaDoProxy = JSON.parse(JSON.stringify(r1.areas));
 
                 areas1ForaDoProxy.forEach((a1) => {
-
+                    
                     //verifica se a restrição é aplicável para o colaborador atual (c1)
                     let restricaoAplicavelAoC1 = false;
 
@@ -332,7 +333,7 @@ export default {
                                    this.colaboradorDentroArea([c1.ultimaLongitude, c1.ultimaLatitude], a2.coordenadas[0], a2.coordenadas[2]) &&
                                    this.colaboradorDentroArea([c2.ultimaLongitude, c2.ultimaLatitude], a2.coordenadas[0], a2.coordenadas[2]) &&
                                    this.c1ProximoC2([c1.ultimaLongitude, c1.ultimaLatitude],
-                                                    [c2.ultimaLongitude, c2.ultimaLatitude], 50) ) {
+                                                    [c2.ultimaLongitude, c2.ultimaLatitude], 2) ) {
                                                         console.log(new Date().toLocaleString() + " - violação de distanciamento social detectada");
                                                         this.newRegistro.data = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
                                                         this.newRegistro.colaborador = c1.id;
