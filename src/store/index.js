@@ -11,6 +11,7 @@ export default createStore({
     usuarios: [],
     areas: [],
     restricoes: [],
+    registros: [],
 
     /* ||||||||||||||||||||||||||||||||||||||
     |||||||||||| Autenticação ;) ||||||||||||

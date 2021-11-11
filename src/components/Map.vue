@@ -152,46 +152,46 @@ export default {
             // modo == 2: posições geradas em uma porção específica da empresa  (estático - testes)
             // modo == 3: posições geradas em uma porção ainda mais específica  (estático - testes)
             // modo == 4: teste desativado
-            var modo = 4;
+            // var modo = 4;
 
-            if (modo == 1) {
-                var areaDaEmpresa = Object.assign({}, this.areas.find(a => a.titulo.toLowerCase().trim() == 'empresa'));
-                var coordenadas = Object.assign({},areaDaEmpresa.coordenadas);
+            // if (modo == 1) {
+            //     var areaDaEmpresa = Object.assign({}, this.areas.find(a => a.titulo.toLowerCase().trim() == 'empresa'));
+            //     var coordenadas = Object.assign({},areaDaEmpresa.coordenadas);
 
-                var minLong = (parseFloat(Object.assign([], coordenadas[1])[0]));
-                var maxLong = (parseFloat(Object.assign([], coordenadas[0])[0]));
-                var minLat =  (parseFloat(Object.assign([], coordenadas[1])[1]));
-                var maxLat =  (parseFloat(Object.assign([], coordenadas[2])[1]));
+            //     var minLong = (parseFloat(Object.assign([], coordenadas[1])[0]));
+            //     var maxLong = (parseFloat(Object.assign([], coordenadas[0])[0]));
+            //     var minLat =  (parseFloat(Object.assign([], coordenadas[1])[1]));
+            //     var maxLat =  (parseFloat(Object.assign([], coordenadas[2])[1]));
 
-                this.colaboradores.forEach(function(c){
-                    c.ultimaLongitude = (Math.random() * (minLong - maxLong) + maxLong).toFixed(6);
-                    c.ultimaLatitude =  (Math.random() * (minLat - maxLat) + maxLat).toFixed(6);
-                });
-            } else if (modo == 2) {
-                var minLong2 = -47.017600;
-                var maxLong2 = -47.016000;
-                var minLat2 =  -22.717500;
-                var maxLat2 =  -22.718600;
+            //     this.colaboradores.forEach(function(c){
+            //         c.ultimaLongitude = (Math.random() * (minLong - maxLong) + maxLong).toFixed(6);
+            //         c.ultimaLatitude =  (Math.random() * (minLat - maxLat) + maxLat).toFixed(6);
+            //     });
+            // } else if (modo == 2) {
+            //     var minLong2 = -47.017600;
+            //     var maxLong2 = -47.016000;
+            //     var minLat2 =  -22.717500;
+            //     var maxLat2 =  -22.718600;
 
-                this.colaboradores.forEach(function(c){
-                    c.ultimaLongitude = (Math.random() * (minLong2 - maxLong2) + maxLong2).toFixed(6);
-                    c.ultimaLatitude =  (Math.random() * (minLat2 - maxLat2) + maxLat2).toFixed(6);
-                });
+            //     this.colaboradores.forEach(function(c){
+            //         c.ultimaLongitude = (Math.random() * (minLong2 - maxLong2) + maxLong2).toFixed(6);
+            //         c.ultimaLatitude =  (Math.random() * (minLat2 - maxLat2) + maxLat2).toFixed(6);
+            //     });
 
-            } else if (modo == 3){
-                var minLong3 = -47.017600;
-                var maxLong3 = -47.016800;
-                var minLat3 =  -22.717700;
-                var maxLat3 =  -22.718500;
+            // } else if (modo == 3){
+            //     var minLong3 = -47.017600;
+            //     var maxLong3 = -47.016800;
+            //     var minLat3 =  -22.717700;
+            //     var maxLat3 =  -22.718500;
 
-                this.colaboradores.forEach(function(c){
-                    c.ultimaLongitude = (Math.random() * (minLong3 - maxLong3) + maxLong3).toFixed(6);
-                    c.ultimaLatitude =  (Math.random() * (minLat3 - maxLat3) + maxLat3).toFixed(6);
-                });
-            }
+            //     this.colaboradores.forEach(function(c){
+            //         c.ultimaLongitude = (Math.random() * (minLong3 - maxLong3) + maxLong3).toFixed(6);
+            //         c.ultimaLatitude =  (Math.random() * (minLat3 - maxLat3) + maxLat3).toFixed(6);
+            //     });
+            // }
 
             this.monitoramentoDeRestricoes();
-        }, 3000);
+        }, 2000);
 
     },
 
@@ -260,7 +260,8 @@ export default {
     },
 
     monitoramentoDeRestricoes() {
-        // this.$store.dispatch("loadColaboradores");
+        
+        this.$store.dispatch("loadColaboradores");
 
         //------------------- IMPORTANTE ---------------------
         // lembrar de descomentar essa linha do loadColaboradores
