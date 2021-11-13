@@ -99,7 +99,7 @@ export default {
   }
   },
   mounted() {
-    //este trecho preenchenche o armazenamento local do navegador com dados de teste
+    //este trecho preenchenche o armazenamento local do navegador com dados de teste toda vez em q carrega-se a página de login ;)
     if (!localStorage.getItem('departamentos')) localStorage.setItem('departamentos', "[{\"id\":1,\"nome\":\"a\"},{\"id\":2,\"nome\":\"b\"},{\"id\":3,\"nome\":\"c\"}]");
     if (!localStorage.getItem('cargos')) localStorage.setItem('cargos', "[{\"id\":1,\"nome\":\"123123123123123123123\"},{\"id\":2,\"nome\":\"asdasd123123\"},{\"id\":3,\"nome\":\"9889798\"}]");
     if (!localStorage.getItem('colaboradores')) localStorage.setItem('colaboradores', "[{\"id\":1,\"matricula\":\"14378\",\"nome\":\"Richard Dias Ribeiro\",\"email\":\"richardias9699@gmail.com\",\"telefone\":\"19996325356\",\"dataNasc\":\"2000-12-29\",\"dataAdmissao\":\"2000-12-30\",\"departamento\":1,\"cargo\":1, \"ultimaLongitude\":-47.016076, \"ultimaLatitude\": -22.718027},{\"id\":2,\"matricula\":\"13912\",\"nome\":\"Kevin O Chris\",\"email\":\"abcd@gmail.com\",\"telefone\":\"+5519995553611\",\"dataNasc\":\"1995-05-31\",\"dataAdmissao\":\"2021-09-05\",\"departamento\":2,\"cargo\":2, \"ultimaLongitude\":-47.016451, \"ultimaLatitude\": -22.717668}]");

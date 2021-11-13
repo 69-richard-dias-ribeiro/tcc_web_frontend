@@ -105,6 +105,18 @@ deleteColaborador(state, id) {
   state.colaboradores.splice(id, 1);
   localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
 },
+updateColaboradorPosition(state, objForEditing) {
+
+  var colaboradorToUpdate = state.colaboradores[objForEditing.id];
+  console.log('That´s my way, e nela eu vou...', colaboradorToUpdate);
+
+  colaboradorToUpdate.ultimaLongitude = objForEditing.ultimaLongitude;
+  colaboradorToUpdate.ultimaLatitude = objForEditing.ultimaLatitude;
+
+  state.colaboradores[objForEditing.id] = colaboradorToUpdate;
+
+  localStorage.setItem('colaboradores', JSON.stringify(state.colaboradores));
+},
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Usuário/Usuários mutations
 addUsuario(state, newUsuario) {
@@ -299,6 +311,9 @@ editColaborador({ commit }, objForEditing) {
 },
 deleteColaborador({ commit }, id) {
   commit('deleteColaborador', id);
+},
+updateColaboradorPosition({ commit }, objForEditing) {
+  commit('updateColaboradorPosition', objForEditing);
 },
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Usuário/Usuários actions

@@ -214,7 +214,9 @@ export default {
             colaborador: null,
             area: null,
             restricao: null
-        }
+        },
+
+        ultimasPosicoes: null
       }
     },
 
@@ -261,21 +263,52 @@ export default {
 
     monitoramentoDeRestricoes() {
         
-        this.$store.dispatch("loadColaboradores");
-
-        //------------------- IMPORTANTE ---------------------
-        // lembrar de descomentar essa linha do loadColaboradores
-        // quando for pra rodar com as posições recebidas pelo app, tá ;)
-        // ---------------------------------------------------
-
         var restricoesAcesso =         this.restricoes.filter(r => r.tipo == 1);
         var restricoesDistanciamento = this.restricoes.filter(r => r.tipo == 2);
 
             restricoesAcesso = JSON.parse(JSON.stringify(restricoesAcesso));
             restricoesDistanciamento = JSON.parse(JSON.stringify(restricoesDistanciamento));
-        var colaboradoresForaDoProxy = JSON.parse(JSON.stringify(this.colaboradores));
+        
         var areas1ForaDoProxy;
         var areas2ForaDoProxy;
+
+//------------------------------------------------------------------------------------
+//-------------------- atualização das posições dos colaboradores --------------------
+//------------------------------------------------------------------------------------
+        
+
+        this.axios.get('http://localhost:8081/ultimaslocalizacoes')
+                .then((response) => {
+                    // return JSON.parse(JSON.stringify(response.data));
+                    return response.data;
+                }).then((resultado) => {
+                    this.ultimasPosicoes = JSON.parse(JSON.stringify(resultado));
+                });
+    
+        this.$store.dispatch("loadColaboradores");
+        var colaboradoresForaDoProxy = JSON.parse(JSON.stringify(this.colaboradores));
+        var ultimasPosicoes = JSON.parse(JSON.stringify(this.ultimasPosicoes));
+        console.log('debug -> ultimasPosicoes: ', ultimasPosicoes);
+        console.log('debug -> colaboradoresForaDoProxy: ', colaboradoresForaDoProxy,'\n\n\n');
+
+        colaboradoresForaDoProxy.forEach((c) => {
+            
+            ultimasPosicoes.forEach((p) => {
+            
+                if (c.matricula == p.matricula) {
+                    this.$store.dispatch('updateColaboradorPosition', 
+                        {   
+                            id: colaboradoresForaDoProxy.indexOf(c),
+                            ultimaLongitude: p.ultimaLongitude,
+                            ultimaLatitude: p.ultimaLatitude
+                        });
+                }
+
+            });
+        });
+//------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
     
         colaboradoresForaDoProxy.forEach((c1) => {
 
