@@ -277,7 +277,7 @@ export default {
 //------------------------------------------------------------------------------------
         
 
-        this.axios.get('http://localhost:8081/ultimaslocalizacoes')
+        this.axios.get('https://richard-wellington-mavi-api.herokuapp.com/ultimaslocalizacoes/')
                 .then((response) => {
                     // return JSON.parse(JSON.stringify(response.data));
                     return response.data;
@@ -299,8 +299,8 @@ export default {
                     this.$store.dispatch('updateColaboradorPosition', 
                         {   
                             id: colaboradoresForaDoProxy.indexOf(c),
-                            ultimaLongitude: p.ultimaLongitude,
-                            ultimaLatitude: p.ultimaLatitude
+                            ultimaLongitude: p.ultimaLongitude.toFixed(6),
+                            ultimaLatitude: p.ultimaLatitude.toFixed(6)
                         });
                 }
 
